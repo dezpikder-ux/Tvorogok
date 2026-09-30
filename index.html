@@ -10,7 +10,8 @@
       -webkit-tap-highlight-color:transparent;
       font-family:'Fredoka','Trebuchet MS',sans-serif; }
   html, body { width:100%; height:100%; overflow:hidden; }
-  body { background:#ffd6e0; }
+  body { background:#ffd6e0; transition:background 0.4s; }
+  body.dark { background:#151520; }
   #cv { display:block; width:100%; height:100%; touch-action:none; }
   .hud { position:absolute; top:0; left:0; right:0; padding:18px 20px;
     display:flex; justify-content:space-between; align-items:flex-start;
@@ -27,29 +28,39 @@
     letter-spacing:1px; text-shadow: 0 0 8px rgba(255,255,255,0.9); }
   .hud .back:active { transform:translateY(3px); box-shadow:0 2px 0 rgba(90,40,150,0.45); }
   .menu { position:absolute; inset:0; z-index:10; display:flex; flex-direction:column;
-    justify-content:center; align-items:center; gap:16px; pointer-events:none; }
+    justify-content:center; align-items:center; gap:14px; pointer-events:none;
+    overflow-y:auto; padding: 20px; }
   .menu > * { pointer-events: auto; }
-  .menu h1 { font-family:'Archivo Black', sans-serif; font-size:54px; font-weight:900;
-    color:#ffffff; margin-bottom:10px; letter-spacing:5px;
+  .menu h1 { font-family:'Archivo Black', sans-serif; font-size:50px; font-weight:900;
+    color:#ffffff; margin-bottom:8px; letter-spacing:5px;
     text-shadow: 0 0 6px #ffffff, 0 0 14px #ffffff, 0 0 28px #ffd0e8,
       0 0 48px #ff6b9d, 0 0 80px #ff6b9d, 5px 5px 0 #ff8ec4, 8px 8px 0 rgba(200,60,120,0.35); }
-  .menu .btn { width:240px; padding:16px; font-size:20px; font-family:inherit;
-    font-weight:700; letter-spacing:4px; text-transform:uppercase;
-    border:4px solid #ffffff; border-radius:24px; color:#ffffff; cursor:pointer;
+  .menu .btn { width:230px; padding:14px; font-size:18px; font-family:inherit;
+    font-weight:700; letter-spacing:3px; text-transform:uppercase;
+    border:4px solid #ffffff; border-radius:22px; color:#ffffff; cursor:pointer;
     transition:0.08s;
     text-shadow: 0 0 6px #ffffff, 0 0 14px rgba(255,255,255,0.8), 2px 2px 0 rgba(0,0,0,0.15); }
   .menu .btn.tap { background:linear-gradient(135deg, #ff9ec4, #ff5c9a);
-    box-shadow: 0 8px 0 rgba(200,60,120,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(255,140,200,0.5); }
+    box-shadow: 0 7px 0 rgba(200,60,120,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(255,140,200,0.5); }
   .menu .btn.jump { background:linear-gradient(135deg, #c4a8ff, #8c5cff);
-    box-shadow: 0 8px 0 rgba(90,40,150,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(160,120,255,0.5); }
+    box-shadow: 0 7px 0 rgba(90,40,150,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(160,120,255,0.5); }
   .menu .btn.slap { background:linear-gradient(135deg, #ff8a8a, #d92a2a);
-    box-shadow: 0 8px 0 rgba(140,20,20,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(255,100,100,0.5); }
+    box-shadow: 0 7px 0 rgba(140,20,20,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(255,100,100,0.5); }
   .menu .btn.shop { background:linear-gradient(135deg, #ffd97a, #ffb030);
-    box-shadow: 0 8px 0 rgba(180,110,20,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(255,200,80,0.5); }
+    box-shadow: 0 7px 0 rgba(180,110,20,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(255,200,80,0.5); }
   .menu .btn.save { background:linear-gradient(135deg, #a8ffd0, #4cd890);
-    box-shadow: 0 8px 0 rgba(30,140,90,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(100,240,160,0.5); }
+    box-shadow: 0 7px 0 rgba(30,140,90,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(100,240,160,0.5); }
+  .menu .btn.ach { background:linear-gradient(135deg, #ffd0e8, #c86ad8);
+    box-shadow: 0 7px 0 rgba(140,40,150,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(200,100,220,0.5); }
   .menu .btn:active { transform:translateY(4px); box-shadow: 0 4px 0 rgba(200,60,120,0.45); }
-  .coin-badge { position:absolute; top:22px; right:22px; display:flex; align-items:center;
+  .menu-top { position:absolute; top:20px; right:20px; display:flex; gap:8px; z-index: 12; }
+  .icon-btn { width:44px; height:44px; border-radius:50%; border:3px solid #ffffff;
+    background:rgba(255,255,255,0.25); color:#ffffff; font-size:20px;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 4px 0 rgba(90,40,150,0.4); backdrop-filter: blur(4px);
+    transition: 0.1s; }
+  .icon-btn:active { transform:translateY(3px); box-shadow: 0 1px 0 rgba(90,40,150,0.4); }
+  .coin-badge { position:absolute; top:22px; left:22px; display:flex; align-items:center;
     gap:8px; padding:8px 16px; background:#ffffff; border:3px solid #ffffff;
     border-radius:24px; box-shadow: 0 4px 0 rgba(180,110,20,0.35), 0 0 18px rgba(255,200,80,0.5);
     font-weight:700; font-size:18px; color:#b87020; letter-spacing:1px; z-index: 11; }
@@ -60,7 +71,8 @@
     background: radial-gradient(circle, #ffb030, transparent); }
   .overlay { position:absolute; inset:0; z-index:8; display:flex; flex-direction:column;
     justify-content:center; align-items:center; gap:14px;
-    background: rgba(255,214,224,0.94); padding: 30px; }
+    background: rgba(255,214,224,0.94); padding: 30px; transition:background 0.4s; }
+  body.dark .overlay { background: rgba(20,20,35,0.94); }
   .overlay h2 { font-family:'Archivo Black', sans-serif; font-size:42px; font-weight:900;
     color:#ffffff;
     text-shadow: 0 0 6px #ffffff, 0 0 16px #ffffff, 0 0 32px #ffd0e8, 0 0 55px #ff6b9d, 4px 4px 0 #ff8ec4;
@@ -77,24 +89,26 @@
     box-shadow: 0 7px 0 rgba(200,60,120,0.45), inset 0 3px 0 rgba(255,255,255,0.4), 0 0 25px rgba(255,140,200,0.6);
     text-shadow: 0 0 8px #ffffff, 2px 2px 0 rgba(0,0,0,0.15); }
   .overlay .btn:active { transform:translateY(4px); box-shadow: 0 3px 0 rgba(200,60,120,0.45); }
-  .shop-modal { position:absolute; inset:0; z-index:20; display:flex;
+  .modal-bg { position:absolute; inset:0; z-index:20; display:flex;
     align-items:center; justify-content:center; background: rgba(120, 60, 100, 0.55);
     padding: 20px; backdrop-filter: blur(3px); }
-  .shop-window { background: linear-gradient(180deg, #ffd6e0 0%, #ffe5cc 55%, #d8d0f0 100%);
-    border-radius: 28px; padding: 18px; width: 100%; max-width: 360px; max-height: 80vh;
+  body.dark .modal-bg { background: rgba(0,0,0,0.7); }
+  .modal-window { background: linear-gradient(180deg, #ffd6e0 0%, #ffe5cc 55%, #d8d0f0 100%);
+    border-radius: 28px; padding: 18px; width: 100%; max-width: 360px; max-height: 82vh;
     display: flex; flex-direction: column;
     box-shadow: 0 20px 60px rgba(120, 60, 100, 0.5), 0 0 0 4px #ffffff, 0 0 40px rgba(255,180,220,0.6);
     border: 3px solid rgba(255,255,255,0.6); position: relative; }
-  .shop-header { display:flex; align-items:center; justify-content:space-between;
+  body.dark .modal-window { background: linear-gradient(180deg, #2a2a3a 0%, #1a1a28 100%); }
+  .modal-header { display:flex; align-items:center; justify-content:space-between;
     margin-bottom: 12px; gap: 8px; }
-  .shop-header .back-icon { width:40px; height:40px; border-radius:50%;
+  .modal-header .back-icon { width:40px; height:40px; border-radius:50%;
     border:3px solid #ffffff; background:linear-gradient(135deg, #c4a8ff, #8c5cff);
     color:#ffffff; font-size:18px; font-weight:700;
     box-shadow: 0 4px 0 rgba(90,40,150,0.45), 0 0 15px rgba(160,120,255,0.6);
     cursor:pointer; display:flex; align-items:center; justify-content:center;
     padding-bottom: 3px; flex-shrink: 0; }
-  .shop-header .back-icon:active { transform:translateY(3px); box-shadow: 0 1px 0 rgba(90,40,150,0.45); }
-  .shop-header h2 { font-family:'Archivo Black', sans-serif; font-size:22px; font-weight:900;
+  .modal-header .back-icon:active { transform:translateY(3px); box-shadow: 0 1px 0 rgba(90,40,150,0.45); }
+  .modal-header h2 { font-family:'Archivo Black', sans-serif; font-size:22px; font-weight:900;
     color:#ffffff;
     text-shadow: 0 0 8px #ffffff, 0 0 18px #ffffff, 0 0 32px #ffd0e8, 0 0 50px #ff6b9d, 3px 3px 0 #ff8ec4;
     letter-spacing:3px; flex: 1; text-align: center; }
@@ -104,7 +118,7 @@
     letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
     border: 3px solid #ffffff; transition: 0.15s;
     background: rgba(255,255,255,0.5); color: #7a4a8a;
-    text-shadow: 0 0 6px rgba(255,255,255,0.5); position: relative; }
+    text-shadow: 0 0 6px rgba(255,255,255,0.5); }
   .char-tab.sonya.active {
     background: linear-gradient(135deg, #ff9ec4, #ff5c9a);
     color: #ffffff;
@@ -122,16 +136,19 @@
   .shop-item { background: #fff; border-radius: 16px; padding: 8px; text-align: center;
     box-shadow: 0 4px 0 rgba(200,60,120,0.3), 0 0 18px rgba(255,180,220,0.4);
     display: flex; flex-direction: column; gap: 5px; border: 3px solid #ffffff; }
+  body.dark .shop-item { background: #2a2a3a; }
   .shop-item.equipped { box-shadow: 0 4px 0 rgba(200,60,120,0.3), 0 0 0 3px #ffb030, 0 0 25px rgba(255,180,50,0.7); }
   .shop-item-preview { height: 55px; border-radius: 12px; display: flex;
     align-items: center; justify-content: center;
     background: linear-gradient(180deg, #fff5fa, #ffe8f2); overflow: hidden; position: relative; }
+  body.dark .shop-item-preview { background: linear-gradient(180deg, #3a3a4a, #2a2a38); }
   .shop-item-name { font-size: 10px; font-weight: 700; color: #5a2a4a;
     text-transform: uppercase; letter-spacing: 0.3px; min-height: 26px;
     display: flex; align-items: center; justify-content: center; line-height: 1.15; }
+  body.dark .shop-item-name { color: #d0b0e0; }
   .shop-item-desc { font-size: 8px; font-weight: 500; color: #9a6a8a;
     font-style: italic; letter-spacing: 0.2px; line-height: 1.15; min-height: 20px;
-    display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 1px; }
+    display: flex; align-items: center; justify-content: center; text-align: center; }
   .shop-item-btn { padding: 7px; border-radius: 10px; border: none; font-family: inherit;
     font-weight: 700; font-size: 11px; cursor: pointer; text-transform: uppercase;
     letter-spacing: 0.8px; background: linear-gradient(135deg, #ff9ec4, #ff5c9a);
@@ -144,8 +161,35 @@
     box-shadow: 0 3px 0 rgba(30,140,90,0.45), 0 0 12px rgba(100,240,160,0.6); }
   .shop-item-btn:disabled { background: #d8d8e0; color: #9a9aa8;
     box-shadow: 0 3px 0 rgba(0,0,0,0.08); cursor: default; text-shadow: none; }
-  .shop-item-btn:disabled:active { transform: none; box-shadow: 0 3px 0 rgba(0,0,0,0.08); }
+  .ach-item { background: #fff; border-radius: 16px; padding: 10px 12px;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+    box-shadow: 0 3px 0 rgba(200,60,120,0.25); border: 3px solid #ffffff;
+    opacity: 0.45; transition: 0.2s; }
+  body.dark .ach-item { background: #2a2a3a; }
+  .ach-item.done { opacity: 1; box-shadow: 0 3px 0 rgba(255,180,50,0.5), 0 0 18px rgba(255,200,80,0.4); }
+  .ach-item .icon { font-size: 30px; flex-shrink: 0; }
+  .ach-item .text { flex: 1; }
+  .ach-item .text .name { font-weight: 700; font-size: 14px; color: #5a2a4a;
+    text-transform: uppercase; letter-spacing: 1px; }
+  body.dark .ach-item .text .name { color: #e0c8f0; }
+  .ach-item .text .desc { font-size: 11px; color: #9a6a8a; margin-top: 2px; }
+  .ach-list { flex:1; overflow-y:auto; padding: 4px; }
+  .ach-list::-webkit-scrollbar { width: 0; }
   .hidden { display:none !important; }
+  .toast-ach { position:fixed; top: 90px; left: 50%; transform:translateX(-50%);
+    background: linear-gradient(135deg, #ffd97a, #ffb030);
+    color: #fff; padding: 12px 24px; border-radius: 20px;
+    font-weight: 700; font-size: 14px; letter-spacing: 1px;
+    box-shadow: 0 8px 25px rgba(200,120,20,0.5), 0 0 0 3px #ffffff;
+    z-index: 200; pointer-events: none; text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    display: flex; align-items: center; gap: 8px; }
+  @keyframes toastAch {
+    0% { opacity:0; transform: translate(-50%, -30px) scale(0.9); }
+    15% { opacity:1; transform: translate(-50%, 0) scale(1); }
+    80% { opacity:1; transform: translate(-50%, 0) scale(1); }
+    100% { opacity:0; transform: translate(-50%, -30px) scale(0.9); }
+  }
 </style>
 </head>
 <body>
@@ -157,21 +201,26 @@
 </div>
 
 <div class="menu" id="menu">
+  <div class="menu-top">
+    <button class="icon-btn" id="themeBtn" title="Тема">🌙</button>
+    <button class="icon-btn" id="soundBtn" title="Звук">🔊</button>
+  </div>
+  <div class="coin-badge">
+    <div class="coin-icon"></div>
+    <span id="menuCoins">0</span>
+  </div>
   <h1>ТВОРОЖОК</h1>
   <button class="btn tap" id="mode1">ТАПАТЬ</button>
   <button class="btn jump" id="mode2">ПРЫГАТЬ</button>
   <button class="btn slap" id="mode3">ШЛЁПАТЬ</button>
   <button class="btn shop" id="shopBtn">МАГАЗИН</button>
+  <button class="btn ach" id="achBtn">ДОСТИЖЕНИЯ</button>
   <button class="btn save" id="saveBtn">СОХРАНИТЬ</button>
-  <div class="coin-badge">
-    <div class="coin-icon"></div>
-    <span id="menuCoins">0</span>
-  </div>
 </div>
 
-<div class="shop-modal hidden" id="shop">
-  <div class="shop-window">
-    <div class="shop-header">
+<div class="modal-bg hidden" id="shop">
+  <div class="modal-window">
+    <div class="modal-header">
       <button class="back-icon" id="shopBack">←</button>
       <h2>МАГАЗИН</h2>
       <div class="coin-badge" style="position:static; flex-shrink:0;">
@@ -184,6 +233,17 @@
       <button class="char-tab veronika" data-char="veronika">ВЕРОНИКА</button>
     </div>
     <div class="shop-items" id="shopItems"></div>
+  </div>
+</div>
+
+<div class="modal-bg hidden" id="ach">
+  <div class="modal-window">
+    <div class="modal-header">
+      <button class="back-icon" id="achBack">←</button>
+      <h2>ДОСТИЖЕНИЯ</h2>
+      <div style="width:40px;"></div>
+    </div>
+    <div class="ach-list" id="achList"></div>
   </div>
 </div>
 
@@ -200,7 +260,9 @@ const ctx = cv.getContext('2d');
 const hud = document.getElementById('hud');
 const menu = document.getElementById('menu');
 const shop = document.getElementById('shop');
+const ach = document.getElementById('ach');
 const shopItems = document.getElementById('shopItems');
+const achList = document.getElementById('achList');
 const scoreEl = document.getElementById('score');
 const backBtn = document.getElementById('backBtn');
 const overlay = document.getElementById('overlay');
@@ -211,10 +273,12 @@ const overlayBtn = document.getElementById('overlayBtn');
 const menuCoins = document.getElementById('menuCoins');
 const shopCoins = document.getElementById('shopCoins');
 
+// ============ АУДИО ============
 let audioCtx = null;
 let musicStarted = false;
 let currentChord = 0;
 let melodyStep = 0;
+let soundEnabled = true;
 
 function initAudio() {
   if (!audioCtx) {
@@ -234,6 +298,7 @@ const MELODY_NOTES = [
 ];
 
 function playNote(freq, dur, vol, type) {
+  if (!soundEnabled) return;
   if (!audioCtx) return;
   if (audioCtx.state === 'suspended') audioCtx.resume();
   const o = audioCtx.createOscillator();
@@ -248,7 +313,7 @@ function playNote(freq, dur, vol, type) {
 }
 
 function playChord() {
-  if (!audioCtx) return;
+  if (!audioCtx || !soundEnabled) return;
   const chord = CHORDS[currentChord];
   chord.forEach((freq, i) => {
     setTimeout(() => playNote(freq, 2.5, 0.035, 'sine'), i * 30);
@@ -273,6 +338,7 @@ function startBgMusic() {
 }
 
 function playTone(freq, dur, type, vol, slide) {
+  if (!soundEnabled) return;
   initAudio();
   if (!audioCtx) return;
   if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -294,7 +360,7 @@ function sfxClick() { playTone(600, 0.06, 'square', 0.08); }
 function sfxBuy() { playTone(600, 0.08, 'sine', 0.13); setTimeout(() => playTone(800, 0.08, 'sine', 0.13), 70); setTimeout(() => playTone(1000, 0.15, 'sine', 0.13), 140); }
 function sfxGameOver() { playTone(500, 0.15, 'sawtooth', 0.1); setTimeout(() => playTone(400, 0.15, 'sawtooth', 0.1), 100); setTimeout(() => playTone(300, 0.3, 'sawtooth', 0.1), 200); }
 function sfxSlap() {
-  if (!audioCtx) return;
+  if (!audioCtx || !soundEnabled) return;
   if (audioCtx.state === 'suspended') audioCtx.resume();
   const bufferSize = audioCtx.sampleRate * 0.1;
   const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
@@ -307,7 +373,6 @@ function sfxSlap() {
   const filter = audioCtx.createBiquadFilter();
   filter.type = 'bandpass';
   filter.frequency.value = 1500;
-  filter.Q.value = 1;
   const g = audioCtx.createGain();
   g.gain.setValueAtTime(0.25, audioCtx.currentTime);
   g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
@@ -321,6 +386,32 @@ function sfxSecret() {
   setTimeout(() => playTone(659.25, 0.2, 'sine', 0.12), 400);
   setTimeout(() => playTone(783.99, 0.4, 'sine', 0.14), 600);
 }
+function sfxMeow() {
+  playTone(520, 0.15, 'sine', 0.13, 420);
+  setTimeout(() => playTone(650, 0.2, 'sine', 0.12, 380), 120);
+}
+function sfxAch() {
+  playTone(523.25, 0.12, 'sine', 0.16);
+  setTimeout(() => playTone(659.25, 0.12, 'sine', 0.16), 120);
+  setTimeout(() => playTone(783.99, 0.12, 'sine', 0.16), 240);
+  setTimeout(() => playTone(1046.5, 0.3, 'sine', 0.18), 360);
+}
+function sfxWave() { playTone(700, 0.1, 'sine', 0.1, 900); setTimeout(() => playTone(800, 0.1, 'sine', 0.1, 1000), 100); }
+
+// ============ ГОЛОС СОНИ ============
+function sonyaSay(text) {
+  if (!soundEnabled) return;
+  if (!('speechSynthesis' in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ru-RU';
+    u.pitch = 1.5;
+    u.rate = 1.05;
+    u.volume = 0.5;
+    window.speechSynthesis.speak(u);
+  } catch(e) {}
+}
 
 let W, H, dpr;
 function resize() {
@@ -333,21 +424,60 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
+// ============ МАГАЗИН ============
 const SHOP_ITEMS = [
   { id: 'default_skirt', name: 'ЧЁРНЫЕ БРЮКИ', price: 0, type: 'skirt', isDefault: true, preview: 'pants' },
   { id: 'skirt_pink', name: 'РОЗОВАЯ ЮБКА', price: 50, type: 'skirt', colors: ['#ffb8d9', '#ff5c9a'], preview: 'skirt' },
   { id: 'skirt_black', name: 'ЧЁРНАЯ ЮБКА', price: 80, type: 'skirt', colors: ['#3a3a3a', '#0a0a0a'], preview: 'skirt' },
+
+  { id: 'default_hair', name: 'РАСПУЩЕННЫЕ', price: 0, type: 'hair', isDefault: true, preview: 'hairLong' },
+  { id: 'hair_pony', name: 'ХВОСТИК', price: 60, type: 'hair', preview: 'hairPony' },
+  { id: 'hair_twin', name: 'ДВА ХВОСТИКА', price: 90, type: 'hair', preview: 'hairTwin' },
+  { id: 'hair_bob', name: 'КАРЕ', price: 100, type: 'hair', preview: 'hairBob' },
+  { id: 'hair_bun', name: 'ПУЧОК', price: 120, type: 'hair', preview: 'hairBun' },
+
   { id: 'default_acc', name: 'БЕЗ АКСЕССУАРА', price: 0, type: 'accessory', isDefault: true, preview: 'none' },
   { id: 'acc_cat', name: 'КОШАЧЬИ УШКИ', price: 150, type: 'accessory', preview: 'catEars', desc: 'будь кошкодевочкой' },
   { id: 'acc_scarf', name: 'БЕЛЫЙ ШАРФИК', price: 100, type: 'accessory', preview: 'scarf', desc: 'уютно и тепло' },
-  { id: 'acc_rus_cap', name: 'КЕПКА ТРИКОЛОР', price: 220, type: 'accessory', preview: 'rusCap', desc: 'три цвета флага' },
+];
+
+// Фоны
+const BACKGROUNDS = [
+  { id: 'bg_default', name: 'НЕБО', price: 0, isDefault: true },
+  { id: 'bg_forest', name: 'ЛЕС', price: 200 },
+  { id: 'bg_city', name: 'ГОРОД', price: 300 },
+  { id: 'bg_space', name: 'КОСМОС', price: 500 },
+];
+
+// Достижения
+const ACHIEVEMENTS = [
+  { id: 'first_tap', icon: '👆', name: 'ПЕРВЫЙ ТАП', desc: 'Тапни первый раз' },
+  { id: 'tap_100', icon: '💯', name: '100 ТАПОВ', desc: 'Набери 100 очков в режиме тапать' },
+  { id: 'tap_500', icon: '🔥', name: '500 ТАПОВ', desc: 'Набери 500 очков в режиме тапать' },
+  { id: 'jump_50', icon: '🦘', name: 'ПРЫГУН', desc: 'Прыгни на высоту 50' },
+  { id: 'jump_100', icon: '🚀', name: 'ВЫСОКО', desc: 'Прыгни на высоту 100' },
+  { id: 'first_slap', icon: '✋', name: 'ПЕРВЫЙ ШЛЕПОК', desc: 'Шлёпни Веронику' },
+  { id: 'slap_50', icon: '💢', name: '50 ШЛЕПКОВ', desc: 'Шлёпни 50 раз' },
+  { id: 'first_buy', icon: '🛍️', name: 'ПОКУПАТЕЛЬ', desc: 'Купи первую вещь' },
+  { id: 'cat_friend', icon: '🐱', name: 'ДРУГ КОТА', desc: 'Покорми котика 20 раз' },
+  { id: 'cat_love', icon: '😻', name: 'ЛЮБИМЫЙ КОТ', desc: 'Покорми котика 100 раз' },
+  { id: 'rich_500', icon: '💰', name: 'БОГАЧ', desc: 'Накопи 500 монет' },
+  { id: 'rich_1000', icon: '💎', name: 'МИЛЛИОНЕР', desc: 'Накопи 1000 монет' },
+  { id: 'secret_end', icon: '🖤', name: 'СЕКРЕТ', desc: 'Увидеть секретную концовку' },
 ];
 
 let playerData = {
   coins: 0,
-  owned: ['default_skirt', 'default_acc'],
-  sonya: { equipped: { skirt: 'default_skirt', accessory: 'default_acc' } },
-  veronika: { equipped: { skirt: 'default_skirt', accessory: 'default_acc' } }
+  owned: ['default_skirt', 'default_acc', 'default_hair'],
+  sonya: { equipped: { skirt: 'default_skirt', accessory: 'default_acc', hair: 'default_hair' } },
+  veronika: { equipped: { skirt: 'default_skirt', accessory: 'default_acc', hair: 'default_hair' } },
+  achievements: [],
+  darkTheme: false,
+  background: 'bg_default',
+  catFeedCount: 0,
+  maxTap: 0,
+  maxJump: 0,
+  maxSlap: 0,
 };
 
 let selectedChar = 'sonya';
@@ -358,25 +488,25 @@ function loadPlayerData() {
     if (raw) {
       const data = JSON.parse(raw);
       playerData.coins = data.coins || 0;
-      playerData.owned = Array.isArray(data.owned) ? data.owned : ['default_skirt', 'default_acc'];
-      if (!playerData.owned.includes('default_skirt')) playerData.owned.push('default_skirt');
-      if (!playerData.owned.includes('default_acc')) playerData.owned.push('default_acc');
-
-      if (data.sonya && data.sonya.equipped) {
-        playerData.sonya = data.sonya;
-      } else if (data.equipped) {
-        playerData.sonya.equipped = data.equipped;
-      } else {
-        playerData.sonya.equipped = { skirt: 'default_skirt', accessory: 'default_acc' };
-      }
-      if (data.veronika && data.veronika.equipped) {
-        playerData.veronika = data.veronika;
-      } else {
-        playerData.veronika.equipped = { skirt: 'default_skirt', accessory: 'default_acc' };
-      }
+      playerData.owned = Array.isArray(data.owned) ? data.owned : ['default_skirt', 'default_acc', 'default_hair'];
+      ['default_skirt', 'default_acc', 'default_hair'].forEach(d => {
+        if (!playerData.owned.includes(d)) playerData.owned.push(d);
+      });
+      if (data.sonya && data.sonya.equipped) playerData.sonya = data.sonya;
+      if (data.veronika && data.veronika.equipped) playerData.veronika = data.veronika;
+      if (!playerData.sonya.equipped.hair) playerData.sonya.equipped.hair = 'default_hair';
+      if (!playerData.veronika.equipped.hair) playerData.veronika.equipped.hair = 'default_hair';
+      playerData.achievements = data.achievements || [];
+      playerData.darkTheme = !!data.darkTheme;
+      playerData.background = data.background || 'bg_default';
+      playerData.catFeedCount = data.catFeedCount || 0;
+      playerData.maxTap = data.maxTap || 0;
+      playerData.maxJump = data.maxJump || 0;
+      playerData.maxSlap = data.maxSlap || 0;
     }
   } catch(e) { console.warn(e); }
   updateCoinsUI();
+  applyTheme();
 }
 function savePlayerData() {
   try { localStorage.setItem('tvorozhok_data', JSON.stringify(playerData)); } catch(e) {}
@@ -385,7 +515,31 @@ function updateCoinsUI() {
   menuCoins.textContent = playerData.coins;
   shopCoins.textContent = playerData.coins;
 }
+function applyTheme() {
+  if (playerData.darkTheme) document.body.classList.add('dark');
+  else document.body.classList.remove('dark');
+  document.getElementById('themeBtn').textContent = playerData.darkTheme ? '☀️' : '🌙';
+}
 loadPlayerData();
+
+function giveAchievement(id) {
+  if (playerData.achievements.includes(id)) return;
+  const a = ACHIEVEMENTS.find(x => x.id === id);
+  if (!a) return;
+  playerData.achievements.push(id);
+  savePlayerData();
+  sfxAch();
+  showAchToast(a);
+}
+
+function showAchToast(a) {
+  const t = document.createElement('div');
+  t.className = 'toast-ach';
+  t.innerHTML = `<span style="font-size:20px;">${a.icon}</span><span>${a.name}</span>`;
+  t.style.animation = 'toastAch 3s ease-out forwards';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3100);
+}
 
 function rr(x, y, w, h, r) {
   ctx.beginPath();
@@ -400,6 +554,7 @@ function rr(x, y, w, h, r) {
   ctx.closePath();
 }
 
+// ============ НЕБО / ФОН ============
 let skyTime = 0;
 const DAY_CYCLE = 45000;
 function getSkyPhase() { return (skyTime % DAY_CYCLE) / DAY_CYCLE; }
@@ -433,6 +588,14 @@ function getSkyPalette() {
   };
 }
 
+function drawBackground() {
+  const bg = playerData.background;
+  if (bg === 'bg_forest') return drawForestBg();
+  if (bg === 'bg_city') return drawCityBg();
+  if (bg === 'bg_space') return drawSpaceBg();
+  return drawSky();
+}
+
 function drawSky() {
   const pal = getSkyPalette();
   const g = ctx.createLinearGradient(0, 0, 0, H);
@@ -442,6 +605,77 @@ function drawSky() {
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
   return pal;
+}
+
+function drawForestBg() {
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#b8e0a0');
+  g.addColorStop(0.5, '#d8ecd0');
+  g.addColorStop(1, '#88c070');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(60,120,60,0.25)';
+  for (let i = 0; i < 8; i++) {
+    const x = (i * 137) % W;
+    ctx.beginPath();
+    ctx.ellipse(x, H * 0.7, 60, 100, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.fillStyle = 'rgba(40,90,40,0.35)';
+  for (let i = 0; i < 6; i++) {
+    const x = (i * 191 + 80) % W;
+    ctx.beginPath();
+    ctx.ellipse(x, H * 0.82, 80, 120, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  return { darkness: 0 };
+}
+
+function drawCityBg() {
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#8090c0');
+  g.addColorStop(0.6, '#e0a0b0');
+  g.addColorStop(1, '#504060');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+  for (let i = 0; i < 10; i++) {
+    const bw = 40 + (i * 37) % 50;
+    const bh = 100 + (i * 73) % 200;
+    const bx = i * (W / 10);
+    ctx.fillStyle = `rgba(30,20,50,${0.4 + i * 0.03})`;
+    ctx.fillRect(bx, H - bh, bw, bh);
+    ctx.fillStyle = 'rgba(255,220,120,0.7)';
+    for (let wy = H - bh + 20; wy < H - 20; wy += 30) {
+      for (let wx = bx + 8; wx < bx + bw - 8; wx += 18) {
+        if (Math.random() > 0.5) ctx.fillRect(wx, wy, 6, 8);
+      }
+    }
+  }
+  return { darkness: 0.4 };
+}
+
+function drawSpaceBg() {
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#0a0a20');
+  g.addColorStop(0.5, '#1a0a30');
+  g.addColorStop(1, '#2a1030');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+  for (const s of stars) {
+    ctx.fillStyle = `rgba(255,255,240,${0.6 + Math.sin(skyTime * 0.003 + s.tw) * 0.4})`;
+    ctx.beginPath();
+    ctx.arc(s.x * W, s.y * H, s.s, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.fillStyle = 'rgba(120,80,180,0.35)';
+  ctx.beginPath();
+  ctx.arc(W * 0.8, H * 0.2, 80, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = 'rgba(200,120,180,0.25)';
+  ctx.beginPath();
+  ctx.arc(W * 0.2, H * 0.35, 60, 0, Math.PI * 2);
+  ctx.fill();
+  return { darkness: 0.85 };
 }
 
 const clouds = [];
@@ -488,6 +722,7 @@ function drawCloudShape(x, y, s, color) {
 }
 
 function drawMovingClouds(pal, camY) {
+  if (playerData.background !== 'bg_default') return;
   camY = camY || 0;
   const isNight = pal.darkness > 0.5;
   for (const c of clouds) {
@@ -506,6 +741,7 @@ for (let i = 0; i < 40; i++) {
   stars.push({ x: Math.random(), y: Math.random(), s: Math.random() * 1.5 + 0.5, tw: Math.random() * Math.PI * 2 });
 }
 function drawStars(pal) {
+  if (playerData.background === 'bg_space') return;
   if (pal.darkness < 0.1) return;
   ctx.save();
   for (const s of stars) {
@@ -519,6 +755,7 @@ function drawStars(pal) {
 }
 
 function drawSunMoon(pal) {
+  if (playerData.background !== 'bg_default') return;
   const p = getSkyPhase();
   if (p < 0.5) {
     const sp = p / 0.5;
@@ -570,8 +807,8 @@ function drawFluffyPlatform(x, y, w, h, darkness) {
   ctx.closePath(); ctx.fill();
   ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
   ctx.fillStyle = darkness > 0.5 ? '#b0b0d0' : '#ffffff';
-  const bumpCount = Math.floor(w / 12);
-  for (let i = 0; i < bumpCount; i++) {
+  const bc = Math.floor(w / 12);
+  for (let i = 0; i < bc; i++) {
     ctx.beginPath();
     ctx.arc(x + 8 + i * 12, y + 1, 4 + (i % 2) * 1.5, 0, Math.PI * 2);
     ctx.fill();
@@ -588,44 +825,29 @@ function drawFluffyPlatform(x, y, w, h, darkness) {
 const SONYA_FEET = 18;
 
 const SONYA_CFG = {
-  hairDark: '#4a2c14',
-  hairMid: '#7a4a24',
-  hairLight: '#a8703c',
-  eyeIris: '#3a9a4a',
-  eyeIrisDark: '#1f6a2e',
+  hairDark: '#4a2c14', hairMid: '#7a4a24', hairLight: '#a8703c',
+  eyeIris: '#3a9a4a', eyeIrisDark: '#1f6a2e',
 };
-
 const AFONYA_CFG = {
-  hairDark: '#8a4510',
-  hairMid: '#c86a20',
-  hairLight: '#e8a060',
-  eyeIris: '#6a4a24',
-  eyeIrisDark: '#3a2a14',
+  hairDark: '#8a4510', hairMid: '#c86a20', hairLight: '#e8a060',
+  eyeIris: '#6a4a24', eyeIrisDark: '#3a2a14',
 };
 
 const EYE_COLORS = [
-  { iris: '#4a90d9', dark: '#1a4a8a' },
-  { iris: '#3a9a4a', dark: '#1f6a2e' },
-  { iris: '#6a4a24', dark: '#4a2c14' },
-  { iris: '#8a4ad9', dark: '#5a1a8a' },
-  { iris: '#d9943a', dark: '#a86a1a' },
-  { iris: '#3a9a9a', dark: '#1f6a6a' },
-  { iris: '#c43a3a', dark: '#8a1a1a' },
-  { iris: '#d94a8a', dark: '#8a1a5a' },
+  { iris: '#4a90d9', dark: '#1a4a8a' }, { iris: '#3a9a4a', dark: '#1f6a2e' },
+  { iris: '#6a4a24', dark: '#4a2c14' }, { iris: '#8a4ad9', dark: '#5a1a8a' },
+  { iris: '#d9943a', dark: '#a86a1a' }, { iris: '#3a9a9a', dark: '#1f6a6a' },
+  { iris: '#c43a3a', dark: '#8a1a1a' }, { iris: '#d94a8a', dark: '#8a1a5a' },
   { iris: '#5a5a5a', dark: '#2a2a2a' },
 ];
 
 let veronikaCfgCache = null;
-
 function getVeronikaCfg() {
   if (!veronikaCfgCache) {
     const eye = EYE_COLORS[Math.floor(Math.random() * EYE_COLORS.length)];
     veronikaCfgCache = {
-      hairDark: '#0e0e0e',
-      hairMid: '#1f1f1f',
-      hairLight: '#3a3a3a',
-      eyeIris: eye.iris,
-      eyeIrisDark: eye.dark,
+      hairDark: '#0e0e0e', hairMid: '#1f1f1f', hairLight: '#3a3a3a',
+      eyeIris: eye.iris, eyeIrisDark: eye.dark,
     };
   }
   return veronikaCfgCache;
@@ -639,7 +861,70 @@ function getSkirtItem(who) {
 function getAccessoryItem(who) {
   const w = who || 'sonya';
   const eq = playerData[w].equipped;
-  return SHOP_ITEMS.find(i => i.id === eq.accessory) || SHOP_ITEMS[3];
+  return SHOP_ITEMS.find(i => i.id === eq.accessory) || SHOP_ITEMS[0];
+}
+function getHairItem(who) {
+  const w = who || 'sonya';
+  const eq = playerData[w].equipped;
+  return SHOP_ITEMS.find(i => i.id === eq.hair) || SHOP_ITEMS.find(i => i.id === 'default_hair');
+}
+
+function drawHairExtra(hairId, cfg) {
+  const HD = cfg.hairDark, HM = cfg.hairMid, HL = cfg.hairLight;
+  if (hairId === 'hair_pony') {
+    ctx.fillStyle = HM;
+    ctx.beginPath();
+    ctx.moveTo(14, -60);
+    ctx.quadraticCurveTo(26, -58, 28, -40);
+    ctx.quadraticCurveTo(30, -22, 24, -12);
+    ctx.quadraticCurveTo(20, -20, 22, -40);
+    ctx.quadraticCurveTo(20, -55, 14, -58);
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = HD; ctx.lineWidth = 1; ctx.stroke();
+    ctx.fillStyle = '#ff5c9a';
+    ctx.beginPath(); ctx.arc(15, -59, 3, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#8a1040'; ctx.stroke();
+  } else if (hairId === 'hair_twin') {
+    ctx.fillStyle = HM;
+    ctx.beginPath();
+    ctx.moveTo(-14, -62);
+    ctx.quadraticCurveTo(-28, -58, -30, -42);
+    ctx.quadraticCurveTo(-32, -28, -26, -20);
+    ctx.quadraticCurveTo(-22, -28, -24, -44);
+    ctx.quadraticCurveTo(-22, -56, -14, -60);
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = HD; ctx.lineWidth = 1; ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(14, -62);
+    ctx.quadraticCurveTo(28, -58, 30, -42);
+    ctx.quadraticCurveTo(32, -28, 26, -20);
+    ctx.quadraticCurveTo(22, -28, 24, -44);
+    ctx.quadraticCurveTo(22, -56, 14, -60);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#ff5c9a';
+    ctx.beginPath(); ctx.arc(-15, -61, 3, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(15, -61, 3, 0, Math.PI * 2); ctx.fill();
+  } else if (hairId === 'hair_bob') {
+    ctx.fillStyle = HM;
+    ctx.beginPath();
+    ctx.moveTo(-18, -50);
+    ctx.quadraticCurveTo(-22, -40, -18, -30);
+    ctx.lineTo(18, -30);
+    ctx.quadraticCurveTo(22, -40, 18, -50);
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = HD; ctx.lineWidth = 1; ctx.stroke();
+  } else if (hairId === 'hair_bun') {
+    ctx.fillStyle = HM;
+    ctx.beginPath();
+    ctx.arc(0, -78, 12, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = HD; ctx.lineWidth = 1; ctx.stroke();
+    ctx.fillStyle = HL;
+    ctx.beginPath();
+    ctx.arc(-4, -80, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#ff5c9a';
+    ctx.beginPath(); ctx.arc(0, -68, 3, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#8a1040'; ctx.stroke();
+  }
 }
 
 function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
@@ -648,24 +933,22 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
   const charKey = opts.charKey || 'sonya';
   const skirtItem = opts.skirt || getSkirtItem(charKey);
   const accItem = ('acc' in opts) ? opts.acc : getAccessoryItem(charKey);
+  const hairItem = opts.hair || getHairItem(charKey);
+  const hairId = hairItem ? hairItem.id : 'default_hair';
 
-  const HAIR_DARK = cfg.hairDark;
-  const HAIR_MID = cfg.hairMid;
-  const HAIR_LIGHT = cfg.hairLight;
+  const HD = cfg.hairDark, HM = cfg.hairMid, HL = cfg.hairLight;
   const SKIN = '#ffe4d0';
   const BLOUSE = '#ffffff';
   const BLOUSE_SHADE = '#e0e0e0';
   const PANTS = '#151515';
   const SHOE = '#0a0a0a';
-  const EYE_IRIS = cfg.eyeIris;
-  const EYE_IRIS_DARK = cfg.eyeIrisDark;
+  const EYE_IRIS = cfg.eyeIris, EYE_IRIS_DARK = cfg.eyeIrisDark;
   const EYE_PUPIL = '#0d1a0f';
 
   ctx.save();
   ctx.translate(x, y);
   if (flip) ctx.scale(-scale, scale);
   else ctx.scale(scale, scale);
-
   if (slapped) ctx.rotate(slapped * 0.15);
 
   const armPose = (pose === 'eat' && eatPhase > 0.3) ? 'eat' : (pose === 'jump' ? 'jump' : 'idle');
@@ -676,23 +959,39 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
   };
   const arms = armsMap[armPose];
 
-  ctx.fillStyle = HAIR_DARK;
-  ctx.beginPath();
-  ctx.moveTo(-15, -68);
-  ctx.quadraticCurveTo(-19, -55, -18, -42);
-  ctx.quadraticCurveTo(-17, -34, -15, -30);
-  ctx.lineTo(-9, -30);
-  ctx.quadraticCurveTo(-11, -40, -11, -50);
-  ctx.quadraticCurveTo(-12, -58, -11, -66);
-  ctx.closePath(); ctx.fill();
-  ctx.beginPath();
-  ctx.moveTo(15, -68);
-  ctx.quadraticCurveTo(19, -55, 18, -42);
-  ctx.quadraticCurveTo(17, -34, 15, -30);
-  ctx.lineTo(9, -30);
-  ctx.quadraticCurveTo(11, -40, 11, -50);
-  ctx.quadraticCurveTo(12, -58, 11, -66);
-  ctx.closePath(); ctx.fill();
+  if (hairId === 'default_hair' || hairId === 'hair_bob') {
+    ctx.fillStyle = HD;
+    ctx.beginPath();
+    ctx.moveTo(-15, -68);
+    ctx.quadraticCurveTo(-19, -55, -18, hairId === 'hair_bob' ? -30 : -42);
+    ctx.quadraticCurveTo(-17, hairId === 'hair_bob' ? -28 : -34, -15, -30);
+    ctx.lineTo(-9, -30);
+    ctx.quadraticCurveTo(-11, -40, -11, -50);
+    ctx.quadraticCurveTo(-12, -58, -11, -66);
+    ctx.closePath(); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(15, -68);
+    ctx.quadraticCurveTo(19, -55, 18, hairId === 'hair_bob' ? -30 : -42);
+    ctx.quadraticCurveTo(17, hairId === 'hair_bob' ? -28 : -34, 15, -30);
+    ctx.lineTo(9, -30);
+    ctx.quadraticCurveTo(11, -40, 11, -50);
+    ctx.quadraticCurveTo(12, -58, 11, -66);
+    ctx.closePath(); ctx.fill();
+  } else if (hairId === 'hair_pony' || hairId === 'hair_twin' || hairId === 'hair_bun') {
+    ctx.fillStyle = HD;
+    ctx.beginPath();
+    ctx.moveTo(-14, -68);
+    ctx.quadraticCurveTo(-16, -55, -15, -42);
+    ctx.lineTo(-11, -42);
+    ctx.quadraticCurveTo(-11, -55, -10, -66);
+    ctx.closePath(); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(14, -68);
+    ctx.quadraticCurveTo(16, -55, 15, -42);
+    ctx.lineTo(11, -42);
+    ctx.quadraticCurveTo(11, -55, 10, -66);
+    ctx.closePath(); ctx.fill();
+  }
 
   ctx.fillStyle = SKIN;
   ctx.fillRect(-7, -18, 5, 32);
@@ -724,8 +1023,6 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
     ctx.moveTo(0, -17); ctx.lineTo(0, 10);
     ctx.moveTo(5, -17); ctx.lineTo(8, 8);
     ctx.stroke();
-    ctx.fillStyle = 'rgba(255,255,255,0.55)';
-    ctx.beginPath(); ctx.ellipse(0, -17, 11, 2.5, 0, 0, Math.PI * 2); ctx.fill();
   }
 
   ctx.fillStyle = SHOE;
@@ -755,8 +1052,8 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
   }
 
   if (accItem && accItem.id === 'acc_cat') {
-    ctx.fillStyle = HAIR_MID;
-    ctx.strokeStyle = HAIR_DARK;
+    ctx.fillStyle = HM;
+    ctx.strokeStyle = HD;
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(-15, -72);
@@ -770,13 +1067,12 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
     ctx.closePath(); ctx.fill(); ctx.stroke();
   }
 
-  ctx.fillStyle = HAIR_DARK;
+  ctx.fillStyle = HD;
   ctx.beginPath(); ctx.ellipse(0, -58, 20, 22, 0, 0, Math.PI * 2); ctx.fill();
-
   ctx.fillStyle = SKIN;
   ctx.beginPath(); ctx.ellipse(0, -56, 16, 17, 0, 0, Math.PI * 2); ctx.fill();
 
-  ctx.fillStyle = HAIR_MID;
+  ctx.fillStyle = HM;
   ctx.beginPath();
   ctx.arc(0, -58, 17, Math.PI * 1.02, Math.PI * 1.98);
   ctx.lineTo(17, -58); ctx.lineTo(-17, -58);
@@ -792,9 +1088,14 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
   ctx.quadraticCurveTo(15, -50, 17, -58);
   ctx.closePath(); ctx.fill();
 
-  ctx.fillStyle = HAIR_LIGHT;
+  ctx.fillStyle = HL;
   ctx.beginPath(); ctx.ellipse(-6, -67, 5, 2, -0.3, 0, Math.PI * 2); ctx.fill();
   ctx.beginPath(); ctx.ellipse(6, -68, 3.5, 1.5, 0.3, 0, Math.PI * 2); ctx.fill();
+
+  // Причёска-накладка
+  if (hairId !== 'default_hair') {
+    drawHairExtra(hairId, cfg);
+  }
 
   const eyeY = -55;
   const eyesClosed = (pose === 'eat' && eatPhase > 0.35) || slapped;
@@ -820,9 +1121,7 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
     ctx.beginPath(); ctx.ellipse(-7, eyeY, 4.5, 5.5, 0, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.ellipse(7, eyeY, 4.5, 5.5, 0, 0, Math.PI * 2); ctx.fill();
     const eg = ctx.createLinearGradient(-7, eyeY - 5, -7, eyeY + 5);
-    eg.addColorStop(0, EYE_IRIS_DARK);
-    eg.addColorStop(0.5, EYE_IRIS);
-    eg.addColorStop(1, cfg.eyeIris);
+    eg.addColorStop(0, EYE_IRIS_DARK); eg.addColorStop(0.5, EYE_IRIS); eg.addColorStop(1, cfg.eyeIris);
     ctx.fillStyle = eg;
     ctx.beginPath(); ctx.ellipse(-7, eyeY + 0.3, 3.4, 4.7, 0, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.ellipse(7, eyeY + 0.3, 3.4, 4.7, 0, 0, Math.PI * 2); ctx.fill();
@@ -851,49 +1150,6 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
     ctx.beginPath(); ctx.arc(0, -47, 2.5, 0, Math.PI); ctx.fill();
   }
 
-  if (accItem && accItem.id === 'acc_rus_cap') {
-    const cx = 0;
-    const capBaseY = -77;
-    const bandH = 5;
-    const capW = 44;
-
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath();
-    ctx.moveTo(cx - capW/2, capBaseY - bandH*2);
-    ctx.quadraticCurveTo(cx - capW/2 - 2, capBaseY - bandH*2 - 15, cx, capBaseY - bandH*2 - 17);
-    ctx.quadraticCurveTo(cx + capW/2 + 2, capBaseY - bandH*2 - 15, cx + capW/2, capBaseY - bandH*2);
-    ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = '#c8c8c8';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    ctx.fillStyle = '#0a3a8a';
-    ctx.fillRect(cx - capW/2, capBaseY - bandH*2, capW, bandH);
-    ctx.strokeStyle = '#062a6a';
-    ctx.strokeRect(cx - capW/2, capBaseY - bandH*2, capW, bandH);
-
-    ctx.fillStyle = '#d02020';
-    ctx.fillRect(cx - capW/2, capBaseY - bandH, capW, bandH);
-    ctx.strokeRect(cx - capW/2, capBaseY - bandH, capW, bandH);
-
-    ctx.fillStyle = '#0a3a8a';
-    ctx.beginPath();
-    ctx.moveTo(cx - capW/2 - 1, capBaseY - 1);
-    ctx.quadraticCurveTo(cx, capBaseY + 13, cx + capW/2 + 1, capBaseY - 1);
-    ctx.quadraticCurveTo(cx, capBaseY + 5, cx - capW/2 - 1, capBaseY - 1);
-    ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = '#062a6a';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    ctx.fillStyle = '#d02020';
-    ctx.beginPath();
-    ctx.arc(cx, capBaseY - bandH*2 - 16, 3, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
   drawArm(arms.left);
   drawArm(arms.right);
 
@@ -914,17 +1170,170 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
     ctx.quadraticCurveTo(10, -32, 9, -22);
     ctx.quadraticCurveTo(12, -28, 13, -38);
     ctx.closePath(); ctx.fill(); ctx.stroke();
-    ctx.strokeStyle = '#d8d8e0';
-    ctx.lineWidth = 0.8;
-    for (let i = 0; i < 3; i++) {
-      ctx.beginPath(); ctx.moveTo(-11 + i * 2, -20); ctx.lineTo(-11 + i * 2, -17); ctx.stroke();
-    }
-    for (let i = 0; i < 2; i++) {
-      ctx.beginPath(); ctx.moveTo(9 + i * 2, -22); ctx.lineTo(9 + i * 2, -19); ctx.stroke();
-    }
-    ctx.fillStyle = 'rgba(240,240,255,0.85)';
-    ctx.beginPath(); ctx.ellipse(-4, -41, 4, 1.5, 0, 0, Math.PI * 2); ctx.fill();
   }
+
+  ctx.restore();
+}
+
+// ============ КОТИК ============
+// Толстый пушистый серый кот. Нарисован отдельно.
+function drawCat(x, y, scale, fed, time) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(scale, scale);
+  const breath = Math.sin(time * 0.002) * 1.5;
+  const GRAY = '#a8a8b8';
+  const GRAY_D = '#787888';
+  const GRAY_L = '#d0d0dc';
+  const PINK = '#ffb8c8';
+  const EYE = '#3a8a4a';
+
+  // Тень
+  ctx.fillStyle = 'rgba(0,0,0,0.18)';
+  ctx.beginPath();
+  ctx.ellipse(0, 42, 42, 7, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Хвост (пушистый)
+  ctx.fillStyle = GRAY;
+  ctx.beginPath();
+  ctx.moveTo(30, 20);
+  ctx.quadraticCurveTo(58, 8, 52, -14);
+  ctx.quadraticCurveTo(48, -20, 42, -18);
+  ctx.quadraticCurveTo(48, -8, 40, 8);
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = GRAY_D; ctx.lineWidth = 1.2; ctx.stroke();
+
+  // Тело (толстое, пушистое) — большое пузико
+  ctx.fillStyle = GRAY;
+  ctx.beginPath();
+  ctx.ellipse(0, 22 + breath, 42, 22, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = GRAY_D;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Пузико (светлее)
+  ctx.fillStyle = GRAY_L;
+  ctx.beginPath();
+  ctx.ellipse(0, 28 + breath, 26, 13, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Передние лапки (короткие толстые)
+  ctx.fillStyle = GRAY;
+  ctx.beginPath(); ctx.ellipse(-20, 40, 10, 6, 0, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = GRAY_D; ctx.lineWidth = 1; ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(20, 40, 10, 6, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+  // Розовые подушечки
+  ctx.fillStyle = PINK;
+  ctx.beginPath(); ctx.arc(-20, 40, 2.5, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(20, 40, 2.5, 0, Math.PI * 2); ctx.fill();
+
+  // Голова
+  ctx.fillStyle = GRAY;
+  ctx.beginPath();
+  ctx.ellipse(0, -10 + breath, 28, 26, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = GRAY_D; ctx.lineWidth = 1.5; ctx.stroke();
+
+  // Ушки
+  ctx.fillStyle = GRAY;
+  ctx.beginPath();
+  ctx.moveTo(-22, -22 + breath);
+  ctx.lineTo(-26, -42 + breath);
+  ctx.lineTo(-8, -30 + breath);
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = GRAY_D; ctx.lineWidth = 1.2; ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(22, -22 + breath);
+  ctx.lineTo(26, -42 + breath);
+  ctx.lineTo(8, -30 + breath);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+
+  // Внутренние ушки
+  ctx.fillStyle = PINK;
+  ctx.beginPath();
+  ctx.moveTo(-20, -25 + breath);
+  ctx.lineTo(-22, -38 + breath);
+  ctx.lineTo(-12, -30 + breath);
+  ctx.closePath(); ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(20, -25 + breath);
+  ctx.lineTo(22, -38 + breath);
+  ctx.lineTo(12, -30 + breath);
+  ctx.closePath(); ctx.fill();
+
+  // Глазки
+  if (fed) {
+    // Сытый — прищуренные довольные
+    ctx.strokeStyle = '#1a1a1a';
+    ctx.lineWidth = 2.4; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.arc(-9, -8 + breath, 4, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
+    ctx.beginPath(); ctx.arc(9, -8 + breath, 4, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
+  } else {
+    // Голодный — большие глазки
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath(); ctx.ellipse(-9, -8 + breath, 6, 7, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(9, -8 + breath, 6, 7, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = EYE;
+    ctx.beginPath(); ctx.ellipse(-9, -7 + breath, 4.2, 5.5, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(9, -7 + breath, 4.2, 5.5, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#0d1a0f';
+    ctx.beginPath(); ctx.ellipse(-9, -7 + breath, 2.2, 3, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(9, -7 + breath, 2.2, 3, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath(); ctx.arc(-10, -10 + breath, 1.8, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(8, -10 + breath, 1.8, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // Носик
+  ctx.fillStyle = PINK;
+  ctx.beginPath();
+  ctx.moveTo(0, -1 + breath);
+  ctx.lineTo(-3, -4 + breath);
+  ctx.lineTo(3, -4 + breath);
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = '#8a4050'; ctx.lineWidth = 0.8; ctx.stroke();
+
+  // Ротик
+  ctx.strokeStyle = '#8a4050';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(0, -1 + breath);
+  ctx.lineTo(0, 1 + breath);
+  ctx.moveTo(0, 1 + breath);
+  ctx.quadraticCurveTo(-3, 4 + breath, -6, 2 + breath);
+  ctx.moveTo(0, 1 + breath);
+  ctx.quadraticCurveTo(3, 4 + breath, 6, 2 + breath);
+  ctx.stroke();
+
+  // Усики
+  ctx.strokeStyle = 'rgba(60,60,70,0.6)';
+  ctx.lineWidth = 0.9;
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.moveTo(-10, -2 + breath + i * 2);
+    ctx.lineTo(-28, -4 + breath + i * 3);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(10, -2 + breath + i * 2);
+    ctx.lineTo(28, -4 + breath + i * 3);
+    ctx.stroke();
+  }
+
+  // Румянец
+  ctx.fillStyle = 'rgba(255,140,160,0.35)';
+  ctx.beginPath(); ctx.ellipse(-16, 2 + breath, 4, 2.5, 0, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(16, 2 + breath, 4, 2.5, 0, 0, Math.PI * 2); ctx.fill();
+
+  // Полосочки-полоски
+  ctx.strokeStyle = GRAY_D;
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(-16, -34 + breath); ctx.lineTo(-12, -28 + breath); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(-12, -35 + breath); ctx.lineTo(-8, -29 + breath); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(16, -34 + breath); ctx.lineTo(12, -28 + breath); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(12, -35 + breath); ctx.lineTo(8, -29 + breath); ctx.stroke();
 
   ctx.restore();
 }
@@ -950,15 +1359,12 @@ function drawTvorozhok(x, y, scale) {
 
 function drawSlipper(x, y, angle, scale) {
   ctx.save();
-  ctx.translate(x, y);
-  ctx.rotate(angle);
-  ctx.scale(scale, scale);
+  ctx.translate(x, y); ctx.rotate(angle); ctx.scale(scale, scale);
   ctx.fillStyle = 'rgba(0,0,0,0.15)';
   ctx.beginPath(); ctx.ellipse(0, 18, 32, 6, 0, 0, Math.PI * 2); ctx.fill();
   ctx.fillStyle = '#6a3a1a';
   ctx.beginPath(); ctx.ellipse(0, 0, 32, 16, 0, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = '#3a1a08';
-  ctx.lineWidth = 2.5; ctx.stroke();
+  ctx.strokeStyle = '#3a1a08'; ctx.lineWidth = 2.5; ctx.stroke();
   ctx.fillStyle = '#a86040';
   ctx.beginPath(); ctx.ellipse(0, -3, 30, 13, 0, 0, Math.PI * 2); ctx.fill();
   ctx.strokeStyle = '#3a1a08'; ctx.lineWidth = 2; ctx.stroke();
@@ -968,11 +1374,8 @@ function drawSlipper(x, y, angle, scale) {
   ctx.quadraticCurveTo(-4, -24, 6, -8);
   ctx.lineTo(10, -5);
   ctx.quadraticCurveTo(2, -18, -10, -5);
-  ctx.closePath();
-  ctx.fill();
+  ctx.closePath(); ctx.fill();
   ctx.strokeStyle = '#3a1a08'; ctx.lineWidth = 1.5; ctx.stroke();
-  ctx.fillStyle = 'rgba(255,220,180,0.35)';
-  ctx.beginPath(); ctx.ellipse(-8, -6, 8, 3, -0.3, 0, Math.PI * 2); ctx.fill();
   ctx.restore();
 }
 
@@ -981,27 +1384,22 @@ function drawSpeechBubble(x, y, text, alpha) {
   ctx.globalAlpha = alpha;
   ctx.font = '700 15px Fredoka, sans-serif';
   const textW = ctx.measureText(text).width;
-  const padX = 14;
-  const padY = 10;
+  const padX = 14, padY = 10;
   const bw = textW + padX * 2;
   const bh = 22 + padY * 2;
   const bx = x - bw / 2;
   const by = y - bh;
-
   ctx.fillStyle = '#ffffff';
   ctx.strokeStyle = '#c86a20';
   ctx.lineWidth = 3;
   rr(bx, by, bw, bh, 14);
-  ctx.fill();
-  ctx.stroke();
-
+  ctx.fill(); ctx.stroke();
   ctx.beginPath();
   ctx.moveTo(x - 8, by + bh - 1);
   ctx.lineTo(x, by + bh + 12);
   ctx.lineTo(x + 8, by + bh - 1);
   ctx.closePath();
-  ctx.fillStyle = '#ffffff';
-  ctx.fill();
+  ctx.fillStyle = '#ffffff'; ctx.fill();
   ctx.strokeStyle = '#c86a20';
   ctx.beginPath();
   ctx.moveTo(x - 8, by + bh - 1);
@@ -1015,7 +1413,6 @@ function drawSpeechBubble(x, y, text, alpha) {
   ctx.lineTo(x, by + bh + 10);
   ctx.closePath();
   ctx.fill();
-
   ctx.fillStyle = '#8a4510';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -1025,29 +1422,84 @@ function drawSpeechBubble(x, y, text, alpha) {
   ctx.restore();
 }
 
+// ============ ЧАСТИЦЫ (снежинки/искорки) ============
+const ambientParticles = [];
+function initAmbient() {
+  ambientParticles.length = 0;
+  for (let i = 0; i < 25; i++) {
+    ambientParticles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      s: 1 + Math.random() * 2.5,
+      vy: 0.2 + Math.random() * 0.5,
+      vx: (Math.random() - 0.5) * 0.4,
+      tw: Math.random() * Math.PI * 2,
+      type: Math.random() < 0.5 ? 'sparkle' : 'petal',
+    });
+  }
+}
+initAmbient();
+function updateAmbient(dt) {
+  for (const p of ambientParticles) {
+    p.y += p.vy * (dt / 16);
+    p.x += p.vx * (dt / 16) + Math.sin(skyTime * 0.001 + p.tw) * 0.15;
+    if (p.y > H + 10) { p.y = -10; p.x = Math.random() * W; }
+    if (p.x < -10) p.x = W + 10;
+    if (p.x > W + 10) p.x = -10;
+  }
+}
+function drawAmbient(pal) {
+  ctx.save();
+  for (const p of ambientParticles) {
+    if (p.type === 'sparkle') {
+      const a = 0.4 + Math.sin(skyTime * 0.003 + p.tw) * 0.4;
+      ctx.fillStyle = `rgba(255,255,240,${a})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.fillStyle = `rgba(255,220,240,0.5)`;
+      ctx.beginPath();
+      ctx.ellipse(p.x, p.y, p.s * 1.5, p.s * 0.8, p.tw, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+// ============ РЕЖИМЫ ============
 let mode = null;
 let state = {};
 let coinsAwarded = false;
 
 function startTap() {
   initAudio(); startBgMusic(); sfxClick();
+  sonyaSay('Привет!');
+  sfxWave();
   mode = 'tap';
   coinsAwarded = false;
   state = {
     score: 0, eatTime: 0, particles: [], floats: [], t: 0,
-    sonyaX: W / 2, sonyaY: H * 0.72,
+    sonyaX: W * 0.35, sonyaY: H * 0.72,
+    catX: W * 0.7, catY: H * 0.78,
     scale: Math.min(W, H) / 260,
+    waveT: 1600,
+    catFed: false,
+    catEatTime: 0,
   };
-  state.scale = Math.max(1.8, Math.min(state.scale, 3.2));
+  state.scale = Math.max(1.6, Math.min(state.scale, 3));
   scoreEl.textContent = 0;
   hud.classList.remove('hidden');
   menu.classList.add('hidden');
   overlay.classList.add('hidden');
+  giveAchievement('first_tap');
 }
 
 function updateTap(dt) {
   state.t += dt;
   if (state.eatTime > 0) state.eatTime = Math.max(0, state.eatTime - dt);
+  if (state.waveT > 0) state.waveT -= dt;
+  if (state.catEatTime > 0) state.catEatTime -= dt;
   for (const p of state.particles) {
     p.x += p.vx; p.y += p.vy; p.vy += 0.08; p.life -= dt / 900;
   }
@@ -1059,10 +1511,14 @@ function updateTap(dt) {
 }
 
 function renderTap() {
-  const pal = drawSky();
+  const pal = drawBackground();
   drawStars(pal); drawSunMoon(pal); drawMovingClouds(pal, 0);
+  drawAmbient(pal);
+
   const eatPhase = state.eatTime > 0 ? 1 - state.eatTime / 500 : 0;
-  if (state.eatTime <= 0) {
+
+  // Подсказка пульса вокруг Сони
+  if (state.eatTime <= 0 && state.waveT <= 0) {
     const pulse = 1 + Math.sin(state.t * 0.004) * 0.05;
     ctx.save();
     ctx.translate(state.sonyaX, state.sonyaY - 40 * state.scale);
@@ -1072,18 +1528,35 @@ function renderTap() {
     ctx.beginPath(); ctx.arc(0, -56, 60, 0, Math.PI * 2); ctx.stroke();
     ctx.restore();
   }
+
+  // Тени
   ctx.fillStyle = 'rgba(180,120,200,0.25)';
   ctx.beginPath();
   ctx.ellipse(state.sonyaX, state.sonyaY + 18 * state.scale, 30 * state.scale, 6 * state.scale, 0, 0, Math.PI * 2);
   ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(state.catX, state.catY + 42 * (state.scale * 0.65), 32 * state.scale, 6 * state.scale, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Котик
+  drawCat(state.catX, state.catY, state.scale * 0.65, state.catFed || state.catEatTime > 0, state.t);
+
+  // Соня — с анимацией махания при заходе
   const bob = state.eatTime > 0 ? 0 : Math.sin(state.t * 0.005) * 1.5;
-  drawSonya(state.sonyaX, state.sonyaY + bob, state.scale, 'eat', false, eatPhase, SONYA_CFG, 0, { charKey: 'sonya' });
+  const waveProgress = state.waveT > 0 ? 1 - state.waveT / 1600 : 0;
+  const waving = state.waveT > 0;
+  // подменяем pose на 'wave' если машет
+  const pose = waving ? 'wave' : 'eat';
+  drawSonyaWithWave(state.sonyaX, state.sonyaY + bob, state.scale, pose, false, eatPhase, SONYA_CFG, 0, { charKey: 'sonya' }, waveProgress);
+
   if (eatPhase > 0 && eatPhase < 1) {
     const cx = state.sonyaX + 3 * state.scale;
     const cy = state.sonyaY - 45 * state.scale;
     const sh = 1 - eatPhase;
     if (sh > 0.05) drawTvorozhok(cx, cy, state.scale * 0.9 * sh);
   }
+
+  // Частицы
   ctx.font = `${Math.floor(22 * state.scale * 0.5)}px sans-serif`;
   ctx.textAlign = 'center';
   for (const p of state.particles) {
@@ -1091,6 +1564,8 @@ function renderTap() {
     ctx.fillText(p.emoji, p.x, p.y);
   }
   ctx.globalAlpha = 1;
+
+  // +1
   ctx.font = `900 ${Math.floor(40 * state.scale * 0.4)}px Fredoka, sans-serif`;
   for (const f of state.floats) {
     ctx.globalAlpha = Math.max(0, f.life);
@@ -1102,12 +1577,79 @@ function renderTap() {
   ctx.globalAlpha = 1;
 }
 
-function tapAction() {
+// Соня с волной (рука вверх)
+function drawSonyaWithWave(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts, waveProgress) {
+  if (pose === 'wave') {
+    // Рисуем обычную Соню, но во время волны рисуем машущую руку
+    drawSonya(x, y, scale, 'eat', flip, eatPhase, cfg, slapped, opts);
+    // Дополнительно — машущая рука справа
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(scale, scale);
+    const wa = Math.sin(waveProgress * Math.PI * 6) * 0.5;
+    ctx.strokeStyle = '#ffe4d0';
+    ctx.lineWidth = 6; ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(10, -38);
+    ctx.lineTo(18 + wa * 4, -58);
+    ctx.stroke();
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 7.5;
+    ctx.beginPath();
+    ctx.moveTo(10, -38);
+    ctx.lineTo(15 + wa * 2, -50);
+    ctx.stroke();
+    ctx.restore();
+  } else {
+    drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts);
+  }
+}
+
+function tapAction(clientX, clientY) {
   if (mode !== 'tap') return;
+  const px = clientX != null ? clientX : W / 2;
+  const py = clientY != null ? clientY : H / 2;
+
+  // Проверка тапа по котику
+  const catDx = px - state.catX;
+  const catDy = py - state.catY;
+  if (catDx * catDx + catDy * catDy < (40 * state.scale * 0.65) ** 2 * 1.5) {
+    // Покормить кота
+    if (state.catEatTime > 0) return;
+    state.catEatTime = 1200;
+    state.catFed = true;
+    state.score += 3;
+    scoreEl.textContent = state.score;
+    sfxMeow();
+    playerData.catFeedCount = (playerData.catFeedCount || 0) + 1;
+    savePlayerData();
+    if (playerData.catFeedCount >= 20) giveAchievement('cat_friend');
+    if (playerData.catFeedCount >= 100) giveAchievement('cat_love');
+    // Сердечки над котиком
+    const hearts = ['💕','💖','❤️','😻','💗'];
+    for (let i = 0; i < 6; i++) {
+      state.particles.push({
+        x: state.catX + (Math.random() - 0.5) * 50,
+        y: state.catY - 40 + (Math.random() - 0.5) * 20,
+        vx: (Math.random() - 0.5) * 3,
+        vy: -2 - Math.random() * 2,
+        life: 1,
+        emoji: hearts[Math.floor(Math.random() * hearts.length)],
+      });
+    }
+    state.floats.push({ x: state.catX, y: state.catY - 60, life: 1, text: '+3' });
+    return;
+  }
+
+  // Обычный тап по Соне
+  if (state.waveT > 0) return; // пока машет — не едим
   state.eatTime = 500;
   state.score++;
   scoreEl.textContent = state.score;
   sfxEat();
+
+  state.floats.push({ x: px, y: py - 30, life: 1 });
+
   const emojis = ['💕','✨','🌸','💖','⭐','🩷'];
   for (let i = 0; i < 4; i++) {
     state.particles.push({
@@ -1119,6 +1661,12 @@ function tapAction() {
       emoji: emojis[Math.floor(Math.random() * emojis.length)],
     });
   }
+  if (state.score > playerData.maxTap) {
+    playerData.maxTap = state.score;
+    savePlayerData();
+  }
+  if (state.score >= 100) giveAchievement('tap_100');
+  if (state.score >= 500) giveAchievement('tap_500');
 }
 
 function startJump() {
@@ -1168,6 +1716,12 @@ function updateJump(dt) {
     state.minY = s.y;
     state.score = Math.floor(-state.minY / 10);
     scoreEl.textContent = state.score;
+    if (state.score > playerData.maxJump) {
+      playerData.maxJump = state.score;
+      savePlayerData();
+    }
+    if (state.score >= 50) giveAchievement('jump_50');
+    if (state.score >= 100) giveAchievement('jump_100');
   }
   const target = s.y - H * 0.45;
   if (target < state.cameraY) state.cameraY = target;
@@ -1188,7 +1742,7 @@ function endJump() {
 }
 
 function renderJump() {
-  const pal = drawSky();
+  const pal = drawBackground();
   drawStars(pal); drawSunMoon(pal); drawMovingClouds(pal, state.cameraY);
   for (const p of state.platforms) {
     const py = p.y - state.cameraY;
@@ -1208,12 +1762,12 @@ function renderJump() {
     }
   }
   if (groundY === null) groundY = sy + SONYA_FEET;
-  const shadowDist = groundY - (sy + SONYA_FEET);
-  const shadowAlpha = Math.max(0.08, 0.3 - shadowDist / 500);
-  const shadowScale = Math.max(0.5, 1 - shadowDist / 500);
-  ctx.fillStyle = `rgba(60,40,80,${shadowAlpha})`;
+  const sd = groundY - (sy + SONYA_FEET);
+  const sa = Math.max(0.08, 0.3 - sd / 500);
+  const ss = Math.max(0.5, 1 - sd / 500);
+  ctx.fillStyle = `rgba(60,40,80,${sa})`;
   ctx.beginPath();
-  ctx.ellipse(sx, groundY, 20 * shadowScale, 5 * shadowScale, 0, 0, Math.PI * 2);
+  ctx.ellipse(sx, groundY, 20 * ss, 5 * ss, 0, 0, Math.PI * 2);
   ctx.fill();
   drawSonya(sx, sy, Math.max(1.2, scale), pose, false, 0, SONYA_CFG, 0, { charKey: 'sonya' });
 }
@@ -1223,17 +1777,9 @@ function startSlap() {
   mode = 'slap';
   coinsAwarded = false;
   state = {
-    slaps: 0,
-    t: 0,
-    animT: 9999,
-    slapDone: false,
-    shakeAmp: 0,
-    veronikaCfg: getVeronikaCfg(),
-    floats: [],
-    particles: [],
-    scale: Math.min(W, H) / 260,
-    vX: W / 2,
-    vY: H * 0.7,
+    slaps: 0, t: 0, animT: 9999, slapDone: false, shakeAmp: 0,
+    veronikaCfg: getVeronikaCfg(), floats: [], particles: [],
+    scale: Math.min(W, H) / 260, vX: W / 2, vY: H * 0.7,
   };
   state.scale = Math.max(1.8, Math.min(state.scale, 3.2));
   scoreEl.textContent = 0;
@@ -1252,22 +1798,23 @@ function updateSlap(dt) {
       scoreEl.textContent = state.slaps;
       sfxSlap();
       state.shakeAmp = 12;
+      if (state.slaps === 1) giveAchievement('first_slap');
+      if (state.slaps >= 50) giveAchievement('slap_50');
+      if (state.slaps > playerData.maxSlap) {
+        playerData.maxSlap = state.slaps;
+        savePlayerData();
+      }
       for (let i = 0; i < 8; i++) {
         const a = Math.random() * Math.PI * 2;
         state.particles.push({
-          x: state.vX + 10,
-          y: state.vY - 55 * state.scale,
-          vx: Math.cos(a) * 5,
-          vy: Math.sin(a) * 5 - 2,
-          life: 1,
+          x: state.vX + 10, y: state.vY - 55 * state.scale,
+          vx: Math.cos(a) * 5, vy: Math.sin(a) * 5 - 2, life: 1,
           size: 3 + Math.random() * 3,
           color: ['#ffd93d', '#ff5c8a', '#fff', '#ffb8d9'][Math.floor(Math.random() * 4)],
         });
       }
       state.floats.push({
-        x: state.vX + 15,
-        y: state.vY - 80 * state.scale,
-        life: 1,
+        x: state.vX + 15, y: state.vY - 80 * state.scale, life: 1,
         text: ['ШЛЁП!', 'БАМ!', 'ХЛОП!', 'ОЙ!'][Math.floor(Math.random() * 4)],
       });
     }
@@ -1278,30 +1825,19 @@ function updateSlap(dt) {
   }
   state.shakeAmp *= 0.85;
   if (state.shakeAmp < 0.3) state.shakeAmp = 0;
-
-  for (const p of state.particles) {
-    p.x += p.vx; p.y += p.vy;
-    p.vy += 0.25;
-    p.life -= dt / 700;
-  }
+  for (const p of state.particles) { p.x += p.vx; p.y += p.vy; p.vy += 0.25; p.life -= dt / 700; }
   state.particles = state.particles.filter(p => p.life > 0);
-
-  for (const f of state.floats) {
-    f.y -= dt * 0.1;
-    f.life -= dt / 800;
-  }
+  for (const f of state.floats) { f.y -= dt * 0.1; f.life -= dt / 800; }
   state.floats = state.floats.filter(f => f.life > 0);
 }
 
 function renderSlap() {
-  const pal = drawSky();
+  const pal = drawBackground();
   drawStars(pal); drawSunMoon(pal); drawMovingClouds(pal, 0);
 
   const shake = state.shakeAmp;
   ctx.save();
-  if (shake > 0) {
-    ctx.translate((Math.random() - 0.5) * shake, (Math.random() - 0.5) * shake);
-  }
+  if (shake > 0) ctx.translate((Math.random() - 0.5) * shake, (Math.random() - 0.5) * shake);
 
   ctx.fillStyle = 'rgba(180,120,200,0.25)';
   ctx.beginPath();
@@ -1311,9 +1847,7 @@ function renderSlap() {
   let slapped = 0;
   if (state.animT < 9999) {
     const p = state.animT;
-    if (p > 200 && p < 500) {
-      slapped = 1 - Math.abs(p - 350) / 150;
-    }
+    if (p > 200 && p < 500) slapped = 1 - Math.abs(p - 350) / 150;
   }
 
   const bob = state.animT < 9999 ? 0 : Math.sin(state.t * 0.005) * 1.5;
@@ -1332,38 +1866,34 @@ function renderSlap() {
     ctx.globalAlpha = 1;
     ctx.restore();
   }
-
   ctx.restore();
 
   if (state.animT < 9999 && state.animT < 700) {
     const p = state.animT / 700;
-    let slipperX, slipperY, slipperAngle, slipperScale;
+    let sX, sY, sA, sS;
     const impactX = state.vX + 30 * state.scale;
     const impactY = state.vY - 50 * state.scale;
     const startX = W + 120;
     const startY = H * 0.45;
-
     if (p < 0.35) {
       const t = p / 0.35;
       const e = 1 - Math.pow(1 - t, 3);
-      slipperX = startX + (impactX - startX) * e;
-      slipperY = startY + (impactY - startY) * e;
-      slipperAngle = 0.5 - e * 0.5;
-      slipperScale = state.scale * 0.85;
+      sX = startX + (impactX - startX) * e;
+      sY = startY + (impactY - startY) * e;
+      sA = 0.5 - e * 0.5;
+      sS = state.scale * 0.85;
     } else if (p < 0.55) {
       const t = (p - 0.35) / 0.2;
-      slipperX = impactX + t * 40;
-      slipperY = impactY + t * 30;
-      slipperAngle = 0.3;
-      slipperScale = state.scale * 0.85;
+      sX = impactX + t * 40; sY = impactY + t * 30; sA = 0.3;
+      sS = state.scale * 0.85;
     } else {
       const t = (p - 0.55) / 0.45;
-      slipperX = impactX + 40 + (W + 150 - impactX - 40) * t;
-      slipperY = impactY + 30 - 100 * t;
-      slipperAngle = -0.3 - t * 0.8;
-      slipperScale = state.scale * 0.85 * (1 - t * 0.3);
+      sX = impactX + 40 + (W + 150 - impactX - 40) * t;
+      sY = impactY + 30 - 100 * t;
+      sA = -0.3 - t * 0.8;
+      sS = state.scale * 0.85 * (1 - t * 0.3);
     }
-    drawSlipper(slipperX, slipperY, slipperAngle, slipperScale);
+    drawSlipper(sX, sY, sA, sS);
   }
 
   for (const p of state.particles) {
@@ -1401,10 +1931,7 @@ function renderSlap() {
 function slapAction() {
   if (mode !== 'slap') return;
   if (state.animT < 9999) return;
-  if (Math.random() < 0.01) {
-    triggerSecretEnding();
-    return;
-  }
+  if (Math.random() < 0.01) { triggerSecretEnding(); return; }
   state.animT = 0;
   state.slapDone = false;
 }
@@ -1412,13 +1939,13 @@ function slapAction() {
 function triggerSecretEnding() {
   sfxSecret();
   awardCoins(state.slaps);
+  giveAchievement('secret_end');
   state.t = 0;
   state.endingT = 0;
   state.endingPhase = 'afonya_in';
   state.veronikaX = state.vX;
   state.afonyaX = W + 100;
   state.bubbleAlpha = 0;
-  state.scale = state.scale;
   mode = 'ending';
 }
 
@@ -1427,21 +1954,15 @@ function updateEnding(dt) {
   const scale = state.scale;
   if (state.endingPhase === 'afonya_in') {
     const p = Math.min(1, state.endingT / 1500);
-    const targetX = state.veronikaX + 90 * scale;
-    state.afonyaX = (W + 100) + (targetX - (W + 100)) * p;
+    const tx = state.veronikaX + 90 * scale;
+    state.afonyaX = (W + 100) + (tx - (W + 100)) * p;
     state.endingT += dt;
-    if (p >= 1) {
-      state.endingPhase = 'says';
-      state.endingT = 0;
-    }
+    if (p >= 1) { state.endingPhase = 'says'; state.endingT = 0; }
   } else if (state.endingPhase === 'says') {
     const p = Math.min(1, state.endingT / 400);
     state.bubbleAlpha = p;
     state.endingT += dt;
-    if (state.endingT > 1800) {
-      state.endingPhase = 'walk_off';
-      state.endingT = 0;
-    }
+    if (state.endingT > 1800) { state.endingPhase = 'walk_off'; state.endingT = 0; }
   } else if (state.endingPhase === 'walk_off') {
     const p = Math.min(1, state.endingT / 2500);
     state.veronikaX = (W / 2) - (W / 2 + 200) * p;
@@ -1450,7 +1971,6 @@ function updateEnding(dt) {
     state.endingT += dt;
     if (p >= 1) {
       state.endingPhase = 'done';
-      state.endingT = 0;
       overlayTitle.textContent = '🖤 КОНЕЦ 🖤';
       overlayScore.textContent = 'Афоня забрал Веронику...';
       overlayCoins.textContent = '';
@@ -1463,35 +1983,29 @@ function updateEnding(dt) {
 }
 
 function renderEnding() {
-  const pal = drawSky();
+  const pal = drawBackground();
   drawStars(pal); drawSunMoon(pal); drawMovingClouds(pal, 0);
-
   const scale = state.scale;
   const vY = H * 0.7;
-  const walkBob = (state.endingPhase === 'walk_off' || state.endingPhase === 'afonya_in')
-    ? Math.abs(Math.sin(state.t * 0.012)) * -3
-    : 0;
-
+  const wb = (state.endingPhase === 'walk_off' || state.endingPhase === 'afonya_in')
+    ? Math.abs(Math.sin(state.t * 0.012)) * -3 : 0;
   ctx.fillStyle = 'rgba(180,120,200,0.25)';
   ctx.beginPath();
   ctx.ellipse(state.veronikaX, vY + 18 * scale, 30 * scale, 6 * scale, 0, 0, Math.PI * 2);
   ctx.fill();
-
   ctx.fillStyle = 'rgba(200,140,90,0.25)';
   ctx.beginPath();
   ctx.ellipse(state.afonyaX, vY + 18 * scale, 30 * scale, 6 * scale, 0, 0, Math.PI * 2);
   ctx.fill();
-
-  drawSonya(state.veronikaX, vY + walkBob, scale, 'idle', false, 0, state.veronikaCfg, 0, { charKey: 'veronika' });
-  drawSonya(state.afonyaX, vY + walkBob, scale, 'idle', true, 0, AFONYA_CFG, 0, {
+  drawSonya(state.veronikaX, vY + wb, scale, 'idle', false, 0, state.veronikaCfg, 0, { charKey: 'veronika' });
+  drawSonya(state.afonyaX, vY + wb, scale, 'idle', true, 0, AFONYA_CFG, 0, {
     skirt: { preview: 'pants', colors: ['#1a1a2a', '#0a0a0a'] },
     acc: null,
+    hair: null,
   });
-
   if (state.bubbleAlpha > 0.01) {
     drawSpeechBubble(state.afonyaX, vY - 100 * scale, 'Я забираю Веронику', state.bubbleAlpha);
   }
-
   if (state.endingPhase === 'done') {
     ctx.fillStyle = 'rgba(20,10,30,0.6)';
     ctx.fillRect(0, 0, W, H);
@@ -1505,6 +2019,8 @@ function awardCoins(amount) {
   savePlayerData();
   updateCoinsUI();
   sfxCoin();
+  if (playerData.coins >= 500) giveAchievement('rich_500');
+  if (playerData.coins >= 1000) giveAchievement('rich_1000');
 }
 
 let lastTime = 0;
@@ -1513,21 +2029,23 @@ function loop(t) {
   lastTime = t;
   skyTime += dt;
   updateClouds(dt);
+  updateAmbient(dt);
 
   if (mode === 'tap') { updateTap(dt); renderTap(); }
   else if (mode === 'jump') { updateJump(dt); renderJump(); }
   else if (mode === 'slap') { updateSlap(dt); renderSlap(); }
   else if (mode === 'ending') { updateEnding(dt); renderEnding(); }
   else {
-    const pal = drawSky();
+    const pal = drawBackground();
     drawStars(pal); drawSunMoon(pal); drawMovingClouds(pal, 0);
+    drawAmbient(pal);
   }
   requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
 
 cv.addEventListener('pointerdown', (e) => {
-  if (mode === 'tap') tapAction();
+  if (mode === 'tap') tapAction(e.clientX, e.clientY);
   else if (mode === 'slap') slapAction();
   else if (mode === 'jump') state.touchX = e.clientX;
 });
@@ -1544,6 +2062,21 @@ document.getElementById('mode2').onclick = startJump;
 document.getElementById('mode3').onclick = startSlap;
 document.getElementById('shopBtn').onclick = () => { sfxClick(); openShop(); };
 document.getElementById('shopBack').onclick = () => { sfxClick(); closeShop(); };
+document.getElementById('achBtn').onclick = () => { sfxClick(); openAch(); };
+document.getElementById('achBack').onclick = () => { sfxClick(); closeAch(); };
+
+document.getElementById('themeBtn').onclick = () => {
+  sfxClick();
+  playerData.darkTheme = !playerData.darkTheme;
+  savePlayerData();
+  applyTheme();
+};
+
+document.getElementById('soundBtn').onclick = () => {
+  soundEnabled = !soundEnabled;
+  document.getElementById('soundBtn').textContent = soundEnabled ? '🔊' : '🔇';
+  if (soundEnabled) sfxClick();
+};
 
 document.querySelectorAll('.char-tab').forEach(tab => {
   tab.onclick = () => {
@@ -1558,204 +2091,26 @@ document.querySelectorAll('.char-tab').forEach(tab => {
 document.getElementById('saveBtn').onclick = () => {
   sfxClick();
   const tg = window.Telegram && window.Telegram.WebApp;
-  if (!tg || !tg.sendData) {
-    showToast('ОТКРОЙ ЧЕРЕЗ БОТА!');
-    return;
-  }
+  if (!tg || !tg.sendData) { showToast('ОТКРОЙ ЧЕРЕЗ БОТА!'); return; }
   const ownedNames = playerData.owned.map(id => {
     const it = SHOP_ITEMS.find(i => i.id === id);
-    return it ? it.name : id;
+    if (it) return it.name;
+    const bg = BACKGROUNDS.find(b => b.id === id);
+    return bg ? 'Фон: ' + bg.name : id;
   });
   const s = playerData.sonya.equipped;
   const v = playerData.veronika.equipped;
   const sSkirt = (SHOP_ITEMS.find(i => i.id === s.skirt) || {}).name || '—';
   const sAcc = (SHOP_ITEMS.find(i => i.id === s.accessory) || {}).name || '—';
+  const sHair = (SHOP_ITEMS.find(i => i.id === s.hair) || {}).name || '—';
   const vSkirt = (SHOP_ITEMS.find(i => i.id === v.skirt) || {}).name || '—';
   const vAcc = (SHOP_ITEMS.find(i => i.id === v.accessory) || {}).name || '—';
   tg.sendData(JSON.stringify({
     coins: playerData.coins,
     owned: ownedNames,
     equipped: {
-      sonya: { skirt: sSkirt, accessory: sAcc },
+      sonya: { skirt: sSkirt, accessory: sAcc, hair: sHair },
       veronika: { skirt: vSkirt, accessory: vAcc }
-    }
-  }));
-};
-
-backBtn.onclick = () => {
-  sfxClick();
-  if (mode === 'ending') return;
-  if ((mode === 'tap' || mode === 'slap') && (state.score > 0 || state.slaps > 0)) {
-    const sc = mode === 'slap' ? state.slaps : state.score;
-    awardCoins(sc);
-    overlayTitle.textContent = mode === 'slap' ? 'ЖЕСТОКО!' : 'ОТЛИЧНО!';
-    overlayScore.textContent = (mode === 'slap' ? 'ШЛЕПКОВ: ' : 'ОЧКОВ: ') + sc;
-    overlayCoins.textContent = '+' + sc + ' МОНЕТ';
-    overlayCoins.style.display = '';
-    overlayBtn.textContent = 'В МЕНЮ';
-    overlay.classList.remove('hidden');
-    overlay.dataset.toMenu = '1';
-    mode = null;
-    hud.classList.add('hidden');
-    return;
-  }
-  goToMenu();
-};
-
-overlayBtn.onclick = () => {
-  sfxClick();
-  overlay.classList.add('hidden');
-  if (overlay.dataset.toMenu === '1') {
-    overlay.dataset.toMenu = '';
-    overlayBtn.textContent = 'ЕЩЁ РАЗ';
-    overlayCoins.style.display = '';
-    goToMenu();
-    return;
-  }
-  if (mode === 'jump') startJump();
-};
-
-function goToMenu() {
-  mode = null;
-  hud.classList.add('hidden');
-  overlay.classList.add('hidden');
-  shop.classList.add('hidden');
-  menu.classList.remove('hidden');
-  updateCoinsUI();
-}
-function openShop() {
-  menu.classList.add('hidden');
-  shop.classList.remove('hidden');
-  renderShop();
-}
-function closeShop() {
-  shop.classList.add('hidden');
-  menu.classList.remove('hidden');
-  updateCoinsUI();
-}
-
-function renderShop() {
-  shopItems.innerHTML = '';
-  const eq = playerData[selectedChar].equipped;
-
-  SHOP_ITEMS.forEach(item => {
-    const isOwned = playerData.owned.includes(item.id);
-    const isEquipped = eq[item.type] === item.id;
-    const card = document.createElement('div');
-    card.className = 'shop-item' + (isEquipped ? ' equipped' : '');
-    const preview = document.createElement('div');
-    preview.className = 'shop-item-preview';
-
-    if (item.preview === 'pants') {
-      preview.innerHTML = '<div style="width:26px;height:38px;background:#151515;border-radius:5px;"></div>';
-    } else if (item.preview === 'skirt') {
-      const bg = `linear-gradient(180deg,${item.colors[0]},${item.colors[1]})`;
-      preview.innerHTML = `<div style="width:34px;height:36px;background:${bg};clip-path:polygon(30% 0,70% 0,100% 100%,0% 100%);border-radius:5px;"></div>`;
-    } else if (item.preview === 'catEars') {
-      preview.innerHTML = `
-        <svg width="60" height="40" viewBox="0 0 60 40">
-          <path d="M 8 36 Q 4 22 16 12 Q 24 20 22 36 Z" fill="#7a4a24" stroke="#4a2c14" stroke-width="1.2"/>
-          <path d="M 52 36 Q 56 22 44 12 Q 36 20 38 36 Z" fill="#7a4a24" stroke="#4a2c14" stroke-width="1.2"/>
-        </svg>`;
-    } else if (item.preview === 'scarf') {
-      preview.innerHTML = `
-        <svg width="56" height="48" viewBox="0 0 56 48">
-          <ellipse cx="28" cy="16" rx="20" ry="7" fill="#ffffff" stroke="#d8d8e0" stroke-width="1.5"/>
-          <ellipse cx="28" cy="13" rx="17" ry="6" fill="#ffffff" stroke="#d8d8e0" stroke-width="1.5"/>
-          <path d="M 12 18 Q 6 30 10 42 Q 14 40 16 28 Q 17 22 18 18 Z" fill="#ffffff" stroke="#d8d8e0" stroke-width="1.5"/>
-          <path d="M 40 18 Q 46 28 44 40 Q 40 36 38 24 Z" fill="#ffffff" stroke="#d8d8e0" stroke-width="1.5"/>
-        </svg>`;
-    } else if (item.preview === 'rusCap') {
-      preview.innerHTML = `
-        <svg width="70" height="44" viewBox="0 0 70 44">
-          <path d="M 15 22 Q 18 8 35 8 Q 52 8 55 22 Z" fill="#ffffff" stroke="#b0b0b0" stroke-width="1"/>
-          <rect x="15" y="20" width="40" height="7" fill="#0a3a8a"/>
-          <rect x="15" y="27" width="40" height="7" fill="#d02020"/>
-          <path d="M 12 34 Q 30 38 62 34 Q 64 38 58 40 Q 30 44 14 38 Z" fill="#0a3a8a" stroke="#062a6a" stroke-width="1"/>
-          <circle cx="35" cy="7" r="3" fill="#d02020"/>
-        </svg>`;
-    } else if (item.preview === 'none') {
-      preview.innerHTML = '<div style="font-size:30px;color:#bbb;">—</div>';
-    }
-
-    const name = document.createElement('div');
-    name.className = 'shop-item-name';
-    name.textContent = item.name;
-
-    const desc = document.createElement('div');
-    desc.className = 'shop-item-desc';
-    desc.textContent = item.desc || '';
-
-    const btn = document.createElement('button');
-    btn.className = 'shop-item-btn';
-
-    if (isEquipped) {
-      btn.textContent = 'НАДЕТО'; btn.disabled = true;
-    } else if (isOwned) {
-      btn.textContent = 'НАДЕТЬ'; btn.classList.add('equip');
-      btn.onclick = () => equipItem(item);
-    } else {
-      btn.textContent = 'КУПИТЬ ' + item.price; btn.classList.add('buy');
-      btn.onclick = () => buyItem(item);
-    }
-
-    card.appendChild(preview);
-    card.appendChild(name);
-    if (item.desc) card.appendChild(desc);
-    card.appendChild(btn);
-    shopItems.appendChild(card);
-  });
-}
-
-function buyItem(item) {
-  if (playerData.coins < item.price) {
-    showToast('НЕ ХВАТАЕТ МОНЕТ!');
-    playTone(200, 0.2, 'sawtooth', 0.12);
-    return;
-  }
-  playerData.coins -= item.price;
-  playerData.owned.push(item.id);
-  playerData[selectedChar].equipped[item.type] = item.id;
-  savePlayerData();
-  updateCoinsUI();
-  renderShop();
-  showToast('КУПЛЕНО!');
-  sfxBuy();
-}
-function equipItem(item) {
-  playerData[selectedChar].equipped[item.type] = item.id;
-  savePlayerData();
-  renderShop();
-  sfxClick();
-}
-
-function showToast(msg) {
-  const t = document.createElement('div');
-  t.textContent = msg;
-  t.style.cssText = `
-    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-    background: rgba(255,255,255,0.97); color:#b8424e; font-weight:700;
-    padding: 14px 28px; border-radius: 20px; font-size: 18px;
-    letter-spacing: 3px; text-transform: uppercase;
-    box-shadow: 0 10px 30px rgba(200,60,120,0.5), 0 0 30px rgba(255,180,220,0.8), 0 0 0 3px #ffffff;
-    z-index: 100; pointer-events: none;
-    text-shadow: 0 0 10px rgba(255,180,220,0.8);
-    animation: toastFade 1.4s ease-out forwards;
-  `;
-  if (!document.getElementById('toastStyle')) {
-    const s = document.createElement('style');
-    s.id = 'toastStyle';
-    s.textContent = `@keyframes toastFade {
-      0% { opacity:0; transform:translate(-50%,-30%); }
-      15% { opacity:1; transform:translate(-50%,-50%); }
-      75% { opacity:1; transform:translate(-50%,-50%); }
-      100% { opacity:0; transform:translate(-50%,-70%); }
-    }`;
-    document.head.appendChild(s);
-  }
-  document.body.appendChild(t);
-  setTimeout(() => t.remove(), 1500);
-}
-</script>
-</body>
- </html>
+    },
+    achievements: playerData.achievements.length + '/' + ACHIEVEMENTS.length,
+    cat
