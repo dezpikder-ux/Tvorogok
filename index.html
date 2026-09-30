@@ -66,7 +66,7 @@
     text-shadow: 0 0 6px #ffffff, 0 0 16px #ffffff, 0 0 32px #ffd0e8, 0 0 55px #ff6b9d, 4px 4px 0 #ff8ec4;
     letter-spacing:3px; text-align:center; }
   .overlay .score-line { font-size: 24px; font-weight:700; color:#ffffff;
-    text-shadow: 0 0 10px #ffffff, 0 0 22px rgba(255,140,200,0.9); letter-spacing:2px; }
+    text-shadow: 0 0 10px #ffffff, 0 0 22px rgba(255,140,200,0.9); letter-spacing:2px; text-align:center; }
   .overlay .coins-earned { font-size: 22px; font-weight:700; color:#ffffff;
     text-shadow: 0 0 10px #ffffff, 0 0 22px #ffd97a; padding: 8px 22px; border-radius: 20px;
     background: rgba(255,180,50,0.45); border: 3px solid #ffffff; letter-spacing:2px;
@@ -81,42 +81,60 @@
     align-items:center; justify-content:center; background: rgba(120, 60, 100, 0.55);
     padding: 20px; backdrop-filter: blur(3px); }
   .shop-window { background: linear-gradient(180deg, #ffd6e0 0%, #ffe5cc 55%, #d8d0f0 100%);
-    border-radius: 28px; padding: 18px; width: 100%; max-width: 340px; max-height: 75vh;
+    border-radius: 28px; padding: 18px; width: 100%; max-width: 360px; max-height: 80vh;
     display: flex; flex-direction: column;
     box-shadow: 0 20px 60px rgba(120, 60, 100, 0.5), 0 0 0 4px #ffffff, 0 0 40px rgba(255,180,220,0.6);
     border: 3px solid rgba(255,255,255,0.6); position: relative; }
   .shop-header { display:flex; align-items:center; justify-content:space-between;
-    margin-bottom: 14px; gap: 10px; }
-  .shop-header .back-icon { width:42px; height:42px; border-radius:50%;
+    margin-bottom: 12px; gap: 8px; }
+  .shop-header .back-icon { width:40px; height:40px; border-radius:50%;
     border:3px solid #ffffff; background:linear-gradient(135deg, #c4a8ff, #8c5cff);
-    color:#ffffff; font-size:20px; font-weight:700;
+    color:#ffffff; font-size:18px; font-weight:700;
     box-shadow: 0 4px 0 rgba(90,40,150,0.45), 0 0 15px rgba(160,120,255,0.6);
     cursor:pointer; display:flex; align-items:center; justify-content:center;
     padding-bottom: 3px; flex-shrink: 0; }
   .shop-header .back-icon:active { transform:translateY(3px); box-shadow: 0 1px 0 rgba(90,40,150,0.45); }
-  .shop-header h2 { font-family:'Archivo Black', sans-serif; font-size:24px; font-weight:900;
+  .shop-header h2 { font-family:'Archivo Black', sans-serif; font-size:22px; font-weight:900;
     color:#ffffff;
     text-shadow: 0 0 8px #ffffff, 0 0 18px #ffffff, 0 0 32px #ffd0e8, 0 0 50px #ff6b9d, 3px 3px 0 #ff8ec4;
-    letter-spacing:4px; flex: 1; text-align: center; }
+    letter-spacing:3px; flex: 1; text-align: center; }
+  .char-tabs { display:flex; gap: 10px; margin-bottom: 12px; }
+  .char-tab { flex:1; padding: 12px 8px; border-radius: 16px;
+    font-family: inherit; font-weight: 700; font-size: 14px;
+    letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+    border: 3px solid #ffffff; transition: 0.15s;
+    background: rgba(255,255,255,0.5); color: #7a4a8a;
+    text-shadow: 0 0 6px rgba(255,255,255,0.5); position: relative; }
+  .char-tab.sonya.active {
+    background: linear-gradient(135deg, #ff9ec4, #ff5c9a);
+    color: #ffffff;
+    box-shadow: 0 4px 0 rgba(200,60,120,0.5), 0 0 20px rgba(255,140,200,0.7);
+    text-shadow: 0 0 8px #ffffff; }
+  .char-tab.veronika.active {
+    background: linear-gradient(135deg, #a8a8c8, #4a4a6a);
+    color: #ffffff;
+    box-shadow: 0 4px 0 rgba(40,40,80,0.5), 0 0 20px rgba(120,120,180,0.7);
+    text-shadow: 0 0 8px #ffffff; }
+  .char-tab:active { transform: translateY(2px); }
   .shop-items { flex:1; overflow-y:auto; display:grid; grid-template-columns: 1fr 1fr;
-    gap: 10px; padding: 4px; -webkit-overflow-scrolling: touch; }
+    gap: 8px; padding: 4px; -webkit-overflow-scrolling: touch; }
   .shop-items::-webkit-scrollbar { width: 0; }
-  .shop-item { background: #fff; border-radius: 18px; padding: 10px; text-align: center;
+  .shop-item { background: #fff; border-radius: 16px; padding: 8px; text-align: center;
     box-shadow: 0 4px 0 rgba(200,60,120,0.3), 0 0 18px rgba(255,180,220,0.4);
-    display: flex; flex-direction: column; gap: 6px; border: 3px solid #ffffff; }
+    display: flex; flex-direction: column; gap: 5px; border: 3px solid #ffffff; }
   .shop-item.equipped { box-shadow: 0 4px 0 rgba(200,60,120,0.3), 0 0 0 3px #ffb030, 0 0 25px rgba(255,180,50,0.7); }
-  .shop-item-preview { height: 60px; border-radius: 14px; display: flex;
+  .shop-item-preview { height: 55px; border-radius: 12px; display: flex;
     align-items: center; justify-content: center;
     background: linear-gradient(180deg, #fff5fa, #ffe8f2); overflow: hidden; position: relative; }
-  .shop-item-name { font-size: 11px; font-weight: 700; color: #5a2a4a;
-    text-transform: uppercase; letter-spacing: 0.5px; min-height: 28px;
-    display: flex; align-items: center; justify-content: center; line-height: 1.2; }
-  .shop-item-desc { font-size: 9px; font-weight: 500; color: #9a6a8a;
-    font-style: italic; letter-spacing: 0.3px; line-height: 1.2; min-height: 22px;
-    display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 2px; }
-  .shop-item-btn { padding: 8px; border-radius: 12px; border: none; font-family: inherit;
-    font-weight: 700; font-size: 12px; cursor: pointer; text-transform: uppercase;
-    letter-spacing: 1px; background: linear-gradient(135deg, #ff9ec4, #ff5c9a);
+  .shop-item-name { font-size: 10px; font-weight: 700; color: #5a2a4a;
+    text-transform: uppercase; letter-spacing: 0.3px; min-height: 26px;
+    display: flex; align-items: center; justify-content: center; line-height: 1.15; }
+  .shop-item-desc { font-size: 8px; font-weight: 500; color: #9a6a8a;
+    font-style: italic; letter-spacing: 0.2px; line-height: 1.15; min-height: 20px;
+    display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 1px; }
+  .shop-item-btn { padding: 7px; border-radius: 10px; border: none; font-family: inherit;
+    font-weight: 700; font-size: 11px; cursor: pointer; text-transform: uppercase;
+    letter-spacing: 0.8px; background: linear-gradient(135deg, #ff9ec4, #ff5c9a);
     color: #fff; box-shadow: 0 3px 0 rgba(200,60,120,0.4), 0 0 12px rgba(255,140,200,0.5);
     text-shadow: 0 0 6px rgba(255,255,255,0.7); }
   .shop-item-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(200,60,120,0.4); }
@@ -161,6 +179,10 @@
         <span id="shopCoins">0</span>
       </div>
     </div>
+    <div class="char-tabs">
+      <button class="char-tab sonya active" data-char="sonya">СОНЯ</button>
+      <button class="char-tab veronika" data-char="veronika">ВЕРОНИКА</button>
+    </div>
     <div class="shop-items" id="shopItems"></div>
   </div>
 </div>
@@ -193,7 +215,6 @@ let audioCtx = null;
 let musicStarted = false;
 let currentChord = 0;
 let melodyStep = 0;
-let chordTimer = null;
 
 function initAudio() {
   if (!audioCtx) {
@@ -248,7 +269,7 @@ function startBgMusic() {
   if (audioCtx.state === 'suspended') audioCtx.resume();
   musicStarted = true;
   playChord();
-  chordTimer = setInterval(playChord, 2000);
+  setInterval(playChord, 2000);
 }
 
 function playTone(freq, dur, type, vol, slide) {
@@ -294,6 +315,12 @@ function sfxSlap() {
   noise.start();
   playTone(180, 0.12, 'sawtooth', 0.1, 90);
 }
+function sfxSecret() {
+  playTone(392, 0.2, 'sine', 0.12);
+  setTimeout(() => playTone(523.25, 0.2, 'sine', 0.12), 200);
+  setTimeout(() => playTone(659.25, 0.2, 'sine', 0.12), 400);
+  setTimeout(() => playTone(783.99, 0.4, 'sine', 0.14), 600);
+}
 
 let W, H, dpr;
 function resize() {
@@ -319,8 +346,11 @@ const SHOP_ITEMS = [
 let playerData = {
   coins: 0,
   owned: ['default_skirt', 'default_acc'],
-  equipped: { skirt: 'default_skirt', accessory: 'default_acc' }
+  sonya: { equipped: { skirt: 'default_skirt', accessory: 'default_acc' } },
+  veronika: { equipped: { skirt: 'default_skirt', accessory: 'default_acc' } }
 };
+
+let selectedChar = 'sonya';
 
 function loadPlayerData() {
   try {
@@ -331,7 +361,19 @@ function loadPlayerData() {
       playerData.owned = Array.isArray(data.owned) ? data.owned : ['default_skirt', 'default_acc'];
       if (!playerData.owned.includes('default_skirt')) playerData.owned.push('default_skirt');
       if (!playerData.owned.includes('default_acc')) playerData.owned.push('default_acc');
-      playerData.equipped = data.equipped || { skirt: 'default_skirt', accessory: 'default_acc' };
+
+      if (data.sonya && data.sonya.equipped) {
+        playerData.sonya = data.sonya;
+      } else if (data.equipped) {
+        playerData.sonya.equipped = data.equipped;
+      } else {
+        playerData.sonya.equipped = { skirt: 'default_skirt', accessory: 'default_acc' };
+      }
+      if (data.veronika && data.veronika.equipped) {
+        playerData.veronika = data.veronika;
+      } else {
+        playerData.veronika.equipped = { skirt: 'default_skirt', accessory: 'default_acc' };
+      }
     }
   } catch(e) { console.warn(e); }
   updateCoinsUI();
@@ -553,6 +595,14 @@ const SONYA_CFG = {
   eyeIrisDark: '#1f6a2e',
 };
 
+const AFONYA_CFG = {
+  hairDark: '#8a4510',
+  hairMid: '#c86a20',
+  hairLight: '#e8a060',
+  eyeIris: '#6a4a24',
+  eyeIrisDark: '#3a2a14',
+};
+
 const EYE_COLORS = [
   { iris: '#4a90d9', dark: '#1a4a8a' },
   { iris: '#3a9a4a', dark: '#1f6a2e' },
@@ -565,26 +615,40 @@ const EYE_COLORS = [
   { iris: '#5a5a5a', dark: '#2a2a2a' },
 ];
 
+let veronikaCfgCache = null;
+
 function getVeronikaCfg() {
-  const eye = EYE_COLORS[Math.floor(Math.random() * EYE_COLORS.length)];
-  return {
-    hairDark: '#0e0e0e',
-    hairMid: '#1f1f1f',
-    hairLight: '#3a3a3a',
-    eyeIris: eye.iris,
-    eyeIrisDark: eye.dark,
-  };
+  if (!veronikaCfgCache) {
+    const eye = EYE_COLORS[Math.floor(Math.random() * EYE_COLORS.length)];
+    veronikaCfgCache = {
+      hairDark: '#0e0e0e',
+      hairMid: '#1f1f1f',
+      hairLight: '#3a3a3a',
+      eyeIris: eye.iris,
+      eyeIrisDark: eye.dark,
+    };
+  }
+  return veronikaCfgCache;
 }
 
-function getSkirtItem() {
-  return SHOP_ITEMS.find(i => i.id === playerData.equipped.skirt) || SHOP_ITEMS[0];
+function getSkirtItem(who) {
+  const w = who || 'sonya';
+  const eq = playerData[w].equipped;
+  return SHOP_ITEMS.find(i => i.id === eq.skirt) || SHOP_ITEMS[0];
 }
-function getAccessoryItem() {
-  return SHOP_ITEMS.find(i => i.id === playerData.equipped.accessory) || SHOP_ITEMS[3];
+function getAccessoryItem(who) {
+  const w = who || 'sonya';
+  const eq = playerData[w].equipped;
+  return SHOP_ITEMS.find(i => i.id === eq.accessory) || SHOP_ITEMS[3];
 }
 
-function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped) {
+function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
   if (!cfg) cfg = SONYA_CFG;
+  opts = opts || {};
+  const charKey = opts.charKey || 'sonya';
+  const skirtItem = opts.skirt || getSkirtItem(charKey);
+  const accItem = ('acc' in opts) ? opts.acc : getAccessoryItem(charKey);
+
   const HAIR_DARK = cfg.hairDark;
   const HAIR_MID = cfg.hairMid;
   const HAIR_LIGHT = cfg.hairLight;
@@ -602,11 +666,7 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped) {
   if (flip) ctx.scale(-scale, scale);
   else ctx.scale(scale, scale);
 
-  if (slapped) {
-    ctx.rotate(slapped * 0.15);
-  }
-
-  const accItem = getAccessoryItem();
+  if (slapped) ctx.rotate(slapped * 0.15);
 
   const armPose = (pose === 'eat' && eatPhase > 0.3) ? 'eat' : (pose === 'jump' ? 'jump' : 'idle');
   const armsMap = {
@@ -638,7 +698,6 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped) {
   ctx.fillRect(-7, -18, 5, 32);
   ctx.fillRect(2, -18, 5, 32);
 
-  const skirtItem = getSkirtItem();
   if (skirtItem.preview === 'pants') {
     ctx.fillStyle = PANTS;
     ctx.beginPath();
@@ -695,7 +754,7 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped) {
     ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(mx, my); ctx.stroke();
   }
 
-  if (accItem.id === 'acc_cat') {
+  if (accItem && accItem.id === 'acc_cat') {
     ctx.fillStyle = HAIR_MID;
     ctx.strokeStyle = HAIR_DARK;
     ctx.lineWidth = 1;
@@ -792,45 +851,53 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped) {
     ctx.beginPath(); ctx.arc(0, -47, 2.5, 0, Math.PI); ctx.fill();
   }
 
-  if (accItem.id === 'acc_rus_cap') {
+  if (accItem && accItem.id === 'acc_rus_cap') {
     const cx = 0;
-    const topY = -90;
-    const crownW = 38;
-    const stripeH = 7;
+    const capBaseY = -77;
+    const bandH = 5;
+    const capW = 44;
+
     ctx.fillStyle = '#ffffff';
     ctx.beginPath();
-    ctx.moveTo(cx - crownW/2, topY);
-    ctx.quadraticCurveTo(cx, topY - 9, cx + crownW/2, topY);
-    ctx.lineTo(cx + crownW/2, topY + stripeH);
-    ctx.lineTo(cx - crownW/2, topY + stripeH);
+    ctx.moveTo(cx - capW/2, capBaseY - bandH*2);
+    ctx.quadraticCurveTo(cx - capW/2 - 2, capBaseY - bandH*2 - 15, cx, capBaseY - bandH*2 - 17);
+    ctx.quadraticCurveTo(cx + capW/2 + 2, capBaseY - bandH*2 - 15, cx + capW/2, capBaseY - bandH*2);
     ctx.closePath();
     ctx.fill();
-    ctx.strokeStyle = '#b0b0b0';
-    ctx.lineWidth = 0.8; ctx.stroke();
+    ctx.strokeStyle = '#c8c8c8';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
     ctx.fillStyle = '#0a3a8a';
-    ctx.fillRect(cx - crownW/2, topY + stripeH, crownW, stripeH);
-    ctx.strokeRect(cx - crownW/2, topY + stripeH, crownW, stripeH);
+    ctx.fillRect(cx - capW/2, capBaseY - bandH*2, capW, bandH);
+    ctx.strokeStyle = '#062a6a';
+    ctx.strokeRect(cx - capW/2, capBaseY - bandH*2, capW, bandH);
+
     ctx.fillStyle = '#d02020';
-    ctx.fillRect(cx - crownW/2, topY + stripeH*2, crownW, stripeH);
-    ctx.strokeRect(cx - crownW/2, topY + stripeH*2, crownW, stripeH);
+    ctx.fillRect(cx - capW/2, capBaseY - bandH, capW, bandH);
+    ctx.strokeRect(cx - capW/2, capBaseY - bandH, capW, bandH);
+
     ctx.fillStyle = '#0a3a8a';
     ctx.beginPath();
-    ctx.moveTo(cx - crownW/2, topY + stripeH*3);
-    ctx.quadraticCurveTo(cx + 4, topY + stripeH*3 + 3, cx + crownW/2 + 16, topY + stripeH*3 + 2);
-    ctx.quadraticCurveTo(cx + crownW/2 + 18, topY + stripeH*3 + 5, cx + crownW/2 + 14, topY + stripeH*3 + 6);
-    ctx.quadraticCurveTo(cx, topY + stripeH*3 + 8, cx - crownW/2, topY + stripeH*3 + 2);
+    ctx.moveTo(cx - capW/2 - 1, capBaseY - 1);
+    ctx.quadraticCurveTo(cx, capBaseY + 13, cx + capW/2 + 1, capBaseY - 1);
+    ctx.quadraticCurveTo(cx, capBaseY + 5, cx - capW/2 - 1, capBaseY - 1);
     ctx.closePath();
     ctx.fill();
     ctx.strokeStyle = '#062a6a';
-    ctx.lineWidth = 1; ctx.stroke();
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
     ctx.fillStyle = '#d02020';
-    ctx.beginPath(); ctx.arc(cx, topY - 6, 3, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath();
+    ctx.arc(cx, capBaseY - bandH*2 - 16, 3, 0, Math.PI * 2);
+    ctx.fill();
   }
 
   drawArm(arms.left);
   drawArm(arms.right);
 
-  if (accItem.id === 'acc_scarf') {
+  if (accItem && accItem.id === 'acc_scarf') {
     ctx.fillStyle = '#ffffff';
     ctx.strokeStyle = '#d8d8e0';
     ctx.lineWidth = 1;
@@ -886,19 +953,15 @@ function drawSlipper(x, y, angle, scale) {
   ctx.translate(x, y);
   ctx.rotate(angle);
   ctx.scale(scale, scale);
-
   ctx.fillStyle = 'rgba(0,0,0,0.15)';
   ctx.beginPath(); ctx.ellipse(0, 18, 32, 6, 0, 0, Math.PI * 2); ctx.fill();
-
   ctx.fillStyle = '#6a3a1a';
   ctx.beginPath(); ctx.ellipse(0, 0, 32, 16, 0, 0, Math.PI * 2); ctx.fill();
   ctx.strokeStyle = '#3a1a08';
   ctx.lineWidth = 2.5; ctx.stroke();
-
   ctx.fillStyle = '#a86040';
   ctx.beginPath(); ctx.ellipse(0, -3, 30, 13, 0, 0, Math.PI * 2); ctx.fill();
   ctx.strokeStyle = '#3a1a08'; ctx.lineWidth = 2; ctx.stroke();
-
   ctx.fillStyle = '#7a4020';
   ctx.beginPath();
   ctx.moveTo(-16, -8);
@@ -908,10 +971,57 @@ function drawSlipper(x, y, angle, scale) {
   ctx.closePath();
   ctx.fill();
   ctx.strokeStyle = '#3a1a08'; ctx.lineWidth = 1.5; ctx.stroke();
-
   ctx.fillStyle = 'rgba(255,220,180,0.35)';
   ctx.beginPath(); ctx.ellipse(-8, -6, 8, 3, -0.3, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
 
+function drawSpeechBubble(x, y, text, alpha) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.font = '700 15px Fredoka, sans-serif';
+  const textW = ctx.measureText(text).width;
+  const padX = 14;
+  const padY = 10;
+  const bw = textW + padX * 2;
+  const bh = 22 + padY * 2;
+  const bx = x - bw / 2;
+  const by = y - bh;
+
+  ctx.fillStyle = '#ffffff';
+  ctx.strokeStyle = '#c86a20';
+  ctx.lineWidth = 3;
+  rr(bx, by, bw, bh, 14);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(x - 8, by + bh - 1);
+  ctx.lineTo(x, by + bh + 12);
+  ctx.lineTo(x + 8, by + bh - 1);
+  ctx.closePath();
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+  ctx.strokeStyle = '#c86a20';
+  ctx.beginPath();
+  ctx.moveTo(x - 8, by + bh - 1);
+  ctx.lineTo(x, by + bh + 12);
+  ctx.lineTo(x + 8, by + bh - 1);
+  ctx.stroke();
+  ctx.fillStyle = '#ffffff';
+  ctx.beginPath();
+  ctx.moveTo(x - 7, by + bh - 2);
+  ctx.lineTo(x + 7, by + bh - 2);
+  ctx.lineTo(x, by + bh + 10);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = '#8a4510';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = '700 15px Fredoka, sans-serif';
+  ctx.fillText(text, x, by + bh / 2);
+  ctx.textBaseline = 'alphabetic';
   ctx.restore();
 }
 
@@ -967,7 +1077,7 @@ function renderTap() {
   ctx.ellipse(state.sonyaX, state.sonyaY + 18 * state.scale, 30 * state.scale, 6 * state.scale, 0, 0, Math.PI * 2);
   ctx.fill();
   const bob = state.eatTime > 0 ? 0 : Math.sin(state.t * 0.005) * 1.5;
-  drawSonya(state.sonyaX, state.sonyaY + bob, state.scale, 'eat', false, eatPhase, SONYA_CFG, 0);
+  drawSonya(state.sonyaX, state.sonyaY + bob, state.scale, 'eat', false, eatPhase, SONYA_CFG, 0, { charKey: 'sonya' });
   if (eatPhase > 0 && eatPhase < 1) {
     const cx = state.sonyaX + 3 * state.scale;
     const cy = state.sonyaY - 45 * state.scale;
@@ -1105,7 +1215,7 @@ function renderJump() {
   ctx.beginPath();
   ctx.ellipse(sx, groundY, 20 * shadowScale, 5 * shadowScale, 0, 0, Math.PI * 2);
   ctx.fill();
-  drawSonya(sx, sy, Math.max(1.2, scale), pose, false, 0, SONYA_CFG, 0);
+  drawSonya(sx, sy, Math.max(1.2, scale), pose, false, 0, SONYA_CFG, 0, { charKey: 'sonya' });
 }
 
 function startSlap() {
@@ -1207,7 +1317,7 @@ function renderSlap() {
   }
 
   const bob = state.animT < 9999 ? 0 : Math.sin(state.t * 0.005) * 1.5;
-  drawSonya(state.vX, state.vY + bob, state.scale, 'idle', false, 0, state.veronikaCfg, slapped);
+  drawSonya(state.vX, state.vY + bob, state.scale, 'idle', false, 0, state.veronikaCfg, slapped, { charKey: 'veronika' });
 
   if (state.animT > 200 && state.animT < 900) {
     const a = Math.max(0, 1 - (state.animT - 200) / 700);
@@ -1291,8 +1401,101 @@ function renderSlap() {
 function slapAction() {
   if (mode !== 'slap') return;
   if (state.animT < 9999) return;
+  if (Math.random() < 0.01) {
+    triggerSecretEnding();
+    return;
+  }
   state.animT = 0;
   state.slapDone = false;
+}
+
+function triggerSecretEnding() {
+  sfxSecret();
+  awardCoins(state.slaps);
+  state.t = 0;
+  state.endingT = 0;
+  state.endingPhase = 'afonya_in';
+  state.veronikaX = state.vX;
+  state.afonyaX = W + 100;
+  state.bubbleAlpha = 0;
+  state.scale = state.scale;
+  mode = 'ending';
+}
+
+function updateEnding(dt) {
+  state.t += dt;
+  const scale = state.scale;
+  if (state.endingPhase === 'afonya_in') {
+    const p = Math.min(1, state.endingT / 1500);
+    const targetX = state.veronikaX + 90 * scale;
+    state.afonyaX = (W + 100) + (targetX - (W + 100)) * p;
+    state.endingT += dt;
+    if (p >= 1) {
+      state.endingPhase = 'says';
+      state.endingT = 0;
+    }
+  } else if (state.endingPhase === 'says') {
+    const p = Math.min(1, state.endingT / 400);
+    state.bubbleAlpha = p;
+    state.endingT += dt;
+    if (state.endingT > 1800) {
+      state.endingPhase = 'walk_off';
+      state.endingT = 0;
+    }
+  } else if (state.endingPhase === 'walk_off') {
+    const p = Math.min(1, state.endingT / 2500);
+    state.veronikaX = (W / 2) - (W / 2 + 200) * p;
+    state.afonyaX = (W / 2 + 90 * scale) - (W / 2 + 200) * p;
+    state.bubbleAlpha = Math.max(0, 1 - p * 2);
+    state.endingT += dt;
+    if (p >= 1) {
+      state.endingPhase = 'done';
+      state.endingT = 0;
+      overlayTitle.textContent = '🖤 КОНЕЦ 🖤';
+      overlayScore.textContent = 'Афоня забрал Веронику...';
+      overlayCoins.textContent = '';
+      overlayCoins.style.display = 'none';
+      overlayBtn.textContent = 'В МЕНЮ';
+      overlay.classList.remove('hidden');
+      overlay.dataset.toMenu = '1';
+    }
+  }
+}
+
+function renderEnding() {
+  const pal = drawSky();
+  drawStars(pal); drawSunMoon(pal); drawMovingClouds(pal, 0);
+
+  const scale = state.scale;
+  const vY = H * 0.7;
+  const walkBob = (state.endingPhase === 'walk_off' || state.endingPhase === 'afonya_in')
+    ? Math.abs(Math.sin(state.t * 0.012)) * -3
+    : 0;
+
+  ctx.fillStyle = 'rgba(180,120,200,0.25)';
+  ctx.beginPath();
+  ctx.ellipse(state.veronikaX, vY + 18 * scale, 30 * scale, 6 * scale, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = 'rgba(200,140,90,0.25)';
+  ctx.beginPath();
+  ctx.ellipse(state.afonyaX, vY + 18 * scale, 30 * scale, 6 * scale, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawSonya(state.veronikaX, vY + walkBob, scale, 'idle', false, 0, state.veronikaCfg, 0, { charKey: 'veronika' });
+  drawSonya(state.afonyaX, vY + walkBob, scale, 'idle', true, 0, AFONYA_CFG, 0, {
+    skirt: { preview: 'pants', colors: ['#1a1a2a', '#0a0a0a'] },
+    acc: null,
+  });
+
+  if (state.bubbleAlpha > 0.01) {
+    drawSpeechBubble(state.afonyaX, vY - 100 * scale, 'Я забираю Веронику', state.bubbleAlpha);
+  }
+
+  if (state.endingPhase === 'done') {
+    ctx.fillStyle = 'rgba(20,10,30,0.6)';
+    ctx.fillRect(0, 0, W, H);
+  }
 }
 
 function awardCoins(amount) {
@@ -1314,6 +1517,7 @@ function loop(t) {
   if (mode === 'tap') { updateTap(dt); renderTap(); }
   else if (mode === 'jump') { updateJump(dt); renderJump(); }
   else if (mode === 'slap') { updateSlap(dt); renderSlap(); }
+  else if (mode === 'ending') { updateEnding(dt); renderEnding(); }
   else {
     const pal = drawSky();
     drawStars(pal); drawSunMoon(pal); drawMovingClouds(pal, 0);
@@ -1341,6 +1545,16 @@ document.getElementById('mode3').onclick = startSlap;
 document.getElementById('shopBtn').onclick = () => { sfxClick(); openShop(); };
 document.getElementById('shopBack').onclick = () => { sfxClick(); closeShop(); };
 
+document.querySelectorAll('.char-tab').forEach(tab => {
+  tab.onclick = () => {
+    sfxClick();
+    selectedChar = tab.dataset.char;
+    document.querySelectorAll('.char-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderShop();
+  };
+});
+
 document.getElementById('saveBtn').onclick = () => {
   sfxClick();
   const tg = window.Telegram && window.Telegram.WebApp;
@@ -1352,23 +1566,32 @@ document.getElementById('saveBtn').onclick = () => {
     const it = SHOP_ITEMS.find(i => i.id === id);
     return it ? it.name : id;
   });
-  const skirtName = (SHOP_ITEMS.find(i => i.id === playerData.equipped.skirt) || {}).name || '—';
-  const accName = (SHOP_ITEMS.find(i => i.id === playerData.equipped.accessory) || {}).name || '—';
+  const s = playerData.sonya.equipped;
+  const v = playerData.veronika.equipped;
+  const sSkirt = (SHOP_ITEMS.find(i => i.id === s.skirt) || {}).name || '—';
+  const sAcc = (SHOP_ITEMS.find(i => i.id === s.accessory) || {}).name || '—';
+  const vSkirt = (SHOP_ITEMS.find(i => i.id === v.skirt) || {}).name || '—';
+  const vAcc = (SHOP_ITEMS.find(i => i.id === v.accessory) || {}).name || '—';
   tg.sendData(JSON.stringify({
     coins: playerData.coins,
     owned: ownedNames,
-    equipped: { skirt: skirtName, accessory: accName }
+    equipped: {
+      sonya: { skirt: sSkirt, accessory: sAcc },
+      veronika: { skirt: vSkirt, accessory: vAcc }
+    }
   }));
 };
 
 backBtn.onclick = () => {
   sfxClick();
+  if (mode === 'ending') return;
   if ((mode === 'tap' || mode === 'slap') && (state.score > 0 || state.slaps > 0)) {
     const sc = mode === 'slap' ? state.slaps : state.score;
     awardCoins(sc);
     overlayTitle.textContent = mode === 'slap' ? 'ЖЕСТОКО!' : 'ОТЛИЧНО!';
     overlayScore.textContent = (mode === 'slap' ? 'ШЛЕПКОВ: ' : 'ОЧКОВ: ') + sc;
     overlayCoins.textContent = '+' + sc + ' МОНЕТ';
+    overlayCoins.style.display = '';
     overlayBtn.textContent = 'В МЕНЮ';
     overlay.classList.remove('hidden');
     overlay.dataset.toMenu = '1';
@@ -1385,6 +1608,7 @@ overlayBtn.onclick = () => {
   if (overlay.dataset.toMenu === '1') {
     overlay.dataset.toMenu = '';
     overlayBtn.textContent = 'ЕЩЁ РАЗ';
+    overlayCoins.style.display = '';
     goToMenu();
     return;
   }
@@ -1412,9 +1636,11 @@ function closeShop() {
 
 function renderShop() {
   shopItems.innerHTML = '';
+  const eq = playerData[selectedChar].equipped;
+
   SHOP_ITEMS.forEach(item => {
     const isOwned = playerData.owned.includes(item.id);
-    const isEquipped = playerData.equipped[item.type] === item.id;
+    const isEquipped = eq[item.type] === item.id;
     const card = document.createElement('div');
     card.className = 'shop-item' + (isEquipped ? ' equipped' : '');
     const preview = document.createElement('div');
@@ -1489,7 +1715,7 @@ function buyItem(item) {
   }
   playerData.coins -= item.price;
   playerData.owned.push(item.id);
-  playerData.equipped[item.type] = item.id;
+  playerData[selectedChar].equipped[item.type] = item.id;
   savePlayerData();
   updateCoinsUI();
   renderShop();
@@ -1497,7 +1723,7 @@ function buyItem(item) {
   sfxBuy();
 }
 function equipItem(item) {
-  playerData.equipped[item.type] = item.id;
+  playerData[selectedChar].equipped[item.type] = item.id;
   savePlayerData();
   renderShop();
   sfxClick();
