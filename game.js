@@ -172,7 +172,6 @@ const SHOP_ITEMS = [
   { id: 'default_hair', name: 'РАСПУЩЕННЫЕ', price: 0, type: 'hair', isDefault: true, preview: 'hairLong' },
   { id: 'hair_pony', name: 'ХВОСТИК', price: 60, type: 'hair', preview: 'hairPony' },
   { id: 'hair_twin', name: 'ДВА ХВОСТИКА', price: 90, type: 'hair', preview: 'hairTwin' },
-  { id: 'hair_bob', name: 'КАРЕ', price: 100, type: 'hair', preview: 'hairBob' },
   { id: 'default_acc', name: 'БЕЗ АКСЕССУАРА', price: 0, type: 'accessory', isDefault: true, preview: 'none' },
   { id: 'acc_cat', name: 'КОШАЧЬИ УШКИ', price: 150, type: 'accessory', preview: 'catEars', desc: 'будь кошкодевочкой' },
   { id: 'acc_scarf', name: 'БЕЛЫЙ ШАРФИК', price: 100, type: 'accessory', preview: 'scarf', desc: 'уютно и тепло' },
