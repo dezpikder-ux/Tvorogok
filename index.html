@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ТВОРОЖОК</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<div class="hud hidden" id="hud">
+  <div class="score" id="score">0</div>
+  <button class="back" id="backBtn">← НАЗАД</button>
+</div>
+
+<div class="menu" id="menu">
+  <div class="menu-top">
+    <button class="icon-btn" id="themeBtn" title="Тема">🌙</button>
+    <button class="icon-btn" id="soundBtn" title="Звук">🔊</button>
+  </div>
+  <div class="coin-badge">
+    <div class="coin-icon"></div>
+    <span id="menuCoins">0</span>
+  </div>
+  <h1>ТВОРОЖОК</h1>
+  <button class="btn tap" id="mode1">ТАПАТЬ</button>
+  <button class="btn jump" id="mode2">ПРЫГАТЬ</button>
+  <button class="btn slap" id="mode3">ШЛЁПАТЬ</button>
+  <button class="btn shop" id="shopBtn">МАГАЗИН</button>
+  <button class="btn ach" id="achBtn">ДОСТИЖЕНИЯ</button>
+  <button class="btn save" id="saveBtn">СОХРАНИТЬ</button>
+</div>
+
+<div class="modal-bg hidden" id="shop">
+  <div class="modal-window">
+    <div class="modal-header">
+      <button class="back-icon" id="shopBack">←</button>
+      <h2>МАГАЗИН</h2>
+      <div class="coin-badge" style="position:static; flex-shrink:0;">
+        <div class="coin-icon"></div>
+        <span id="shopCoins">0</span>
+      </div>
+    </div>
+    <div class="char-tabs">
+      <button class="char-tab sonya active" data-char="sonya">СОНЯ</button>
+      <button class="char-tab veronika" data-char="veronika">ВЕРОНИКА</button>
+    </div>
+    <div class="shop-items" id="shopItems"></div>
+  </div>
+</div>
+
+<div class="modal-bg hidden" id="ach">
+  <div class="modal-window">
+    <div class="modal-header">
+      <button class="back-icon" id="achBack">←</button>
+      <h2>ДОСТИЖЕНИЯ</h2>
+      <div style="width:40px;"></div>
+    </div>
+    <div class="ach-list" id="achList"></div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="overlay">
+  <h2 id="overlayTitle"></h2>
+  <div class="score-line" id="overlayScore"></div>
+  <div class="coins-earned" id="overlayCoins"></div>
+  <button class="btn" id="overlayBtn">ЕЩЁ РАЗ</button>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
