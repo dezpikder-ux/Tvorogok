@@ -2112,5 +2112,278 @@ document.getElementById('saveBtn').onclick = () => {
       sonya: { skirt: sSkirt, accessory: sAcc, hair: sHair },
       veronika: { skirt: vSkirt, accessory: vAcc }
     },
+        equipped: {
+      sonya: { skirt: sSkirt, accessory: sAcc, hair: sHair },
+      veronika: { skirt: vSkirt, accessory: vAcc }
+    },
     achievements: playerData.achievements.length + '/' + ACHIEVEMENTS.length,
-    cat
+    catFeeds: playerData.catFeedCount
+  }));
+};
+
+backBtn.onclick = () => {
+  sfxClick();
+  if (mode === 'ending') return;
+  if ((mode === 'tap' || mode === 'slap') && (state.score > 0 || state.slaps > 0)) {
+    const sc = mode === 'slap' ? state.slaps : state.score;
+    awardCoins(sc);
+    overlayTitle.textContent = mode === 'slap' ? 'ЖЕСТОКО!' : 'ОТЛИЧНО!';
+    overlayScore.textContent = (mode === 'slap' ? 'ШЛЕПКОВ: ' : 'ОЧКОВ: ') + sc;
+    overlayCoins.textContent = '+' + sc + ' МОНЕТ';
+    overlayCoins.style.display = '';
+    overlayBtn.textContent = 'В МЕНЮ';
+    overlay.classList.remove('hidden');
+    overlay.dataset.toMenu = '1';
+    mode = null;
+    hud.classList.add('hidden');
+    return;
+  }
+  goToMenu();
+};
+
+overlayBtn.onclick = () => {
+  sfxClick();
+  overlay.classList.add('hidden');
+  if (overlay.dataset.toMenu === '1') {
+    overlay.dataset.toMenu = '';
+    overlayBtn.textContent = 'ЕЩЁ РАЗ';
+    overlayCoins.style.display = '';
+    goToMenu();
+    return;
+  }
+  if (mode === 'jump') startJump();
+};
+
+function goToMenu() {
+  mode = null;
+  hud.classList.add('hidden');
+  overlay.classList.add('hidden');
+  shop.classList.add('hidden');
+  ach.classList.add('hidden');
+  menu.classList.remove('hidden');
+  updateCoinsUI();
+}
+
+function openShop() {
+  menu.classList.add('hidden');
+  shop.classList.remove('hidden');
+  renderShop();
+}
+function closeShop() {
+  shop.classList.add('hidden');
+  menu.classList.remove('hidden');
+  updateCoinsUI();
+}
+function openAch() {
+  menu.classList.add('hidden');
+  ach.classList.remove('hidden');
+  renderAch();
+}
+function closeAch() {
+  ach.classList.add('hidden');
+  menu.classList.remove('hidden');
+}
+
+function renderAch() {
+  achList.innerHTML = '';
+  ACHIEVEMENTS.forEach(a => {
+    const done = playerData.achievements.includes(a.id);
+    const el = document.createElement('div');
+    el.className = 'ach-item' + (done ? ' done' : '');
+    el.innerHTML = `
+      <div class="icon">${done ? a.icon : '❓'}</div>
+      <div class="text">
+        <div class="name">${a.name}</div>
+        <div class="desc">${a.desc}</div>
+      </div>
+      <div style="font-size:20px;">${done ? '✅' : ''}</div>
+    `;
+    achList.appendChild(el);
+  });
+}
+
+function renderShop() {
+  shopItems.innerHTML = '';
+  const eq = playerData[selectedChar].equipped;
+
+  SHOP_ITEMS.forEach(item => {
+    const isOwned = playerData.owned.includes(item.id);
+    const isEquipped = eq[item.type] === item.id;
+    const card = document.createElement('div');
+    card.className = 'shop-item' + (isEquipped ? ' equipped' : '');
+    const preview = document.createElement('div');
+    preview.className = 'shop-item-preview';
+
+    if (item.preview === 'pants') {
+      preview.innerHTML = '<div style="width:26px;height:38px;background:#151515;border-radius:5px;"></div>';
+    } else if (item.preview === 'skirt') {
+      const bg = `linear-gradient(180deg,${item.colors[0]},${item.colors[1]})`;
+      preview.innerHTML = `<div style="width:34px;height:36px;background:${bg};clip-path:polygon(30% 0,70% 0,100% 100%,0% 100%);border-radius:5px;"></div>`;
+    } else if (item.preview === 'catEars') {
+      preview.innerHTML = `<svg width="60" height="40" viewBox="0 0 60 40">
+        <path d="M 8 36 Q 4 22 16 12 Q 24 20 22 36 Z" fill="#7a4a24" stroke="#4a2c14" stroke-width="1.2"/>
+        <path d="M 52 36 Q 56 22 44 12 Q 36 20 38 36 Z" fill="#7a4a24" stroke="#4a2c14" stroke-width="1.2"/>
+      </svg>`;
+    } else if (item.preview === 'scarf') {
+      preview.innerHTML = `<svg width="56" height="48" viewBox="0 0 56 48">
+        <ellipse cx="28" cy="16" rx="20" ry="7" fill="#ffffff" stroke="#d8d8e0" stroke-width="1.5"/>
+        <path d="M 12 18 Q 6 30 10 42 Q 14 40 16 28 Q 17 22 18 18 Z" fill="#ffffff" stroke="#d8d8e0" stroke-width="1.5"/>
+        <path d="M 40 18 Q 46 28 44 40 Q 40 36 38 24 Z" fill="#ffffff" stroke="#d8d8e0" stroke-width="1.5"/>
+      </svg>`;
+    } else if (item.preview === 'hairLong') {
+      preview.innerHTML = '<div style="font-size:34px;">💇‍♀️</div>';
+    } else if (item.preview === 'hairPony') {
+      preview.innerHTML = '<div style="font-size:34px;">🎀</div>';
+    } else if (item.preview === 'hairTwin') {
+      preview.innerHTML = '<div style="font-size:34px;">👧</div>';
+    } else if (item.preview === 'hairBob') {
+      preview.innerHTML = '<div style="font-size:34px;">💁‍♀️</div>';
+    } else if (item.preview === 'hairBun') {
+      preview.innerHTML = '<div style="font-size:34px;">🍡</div>';
+    } else if (item.preview === 'none') {
+      preview.innerHTML = '<div style="font-size:30px;color:#bbb;">—</div>';
+    }
+
+    const name = document.createElement('div');
+    name.className = 'shop-item-name';
+    name.textContent = item.name;
+
+    const desc = document.createElement('div');
+    desc.className = 'shop-item-desc';
+    desc.textContent = item.desc || '';
+
+    const btn = document.createElement('button');
+    btn.className = 'shop-item-btn';
+    if (isEquipped) {
+      btn.textContent = 'НАДЕТО'; btn.disabled = true;
+    } else if (isOwned) {
+      btn.textContent = 'НАДЕТЬ'; btn.classList.add('equip');
+      btn.onclick = () => equipItem(item);
+    } else {
+      btn.textContent = 'КУПИТЬ ' + item.price; btn.classList.add('buy');
+      btn.onclick = () => buyItem(item);
+    }
+
+    card.appendChild(preview);
+    card.appendChild(name);
+    if (item.desc) card.appendChild(desc);
+    card.appendChild(btn);
+    shopItems.appendChild(card);
+  });
+
+  BACKGROUNDS.forEach(bg => {
+    const isOwned = playerData.owned.includes(bg.id) || bg.isDefault;
+    const isEquipped = playerData.background === bg.id;
+    const card = document.createElement('div');
+    card.className = 'shop-item' + (isEquipped ? ' equipped' : '');
+    const preview = document.createElement('div');
+    preview.className = 'shop-item-preview';
+    const colors = {
+      bg_default: 'linear-gradient(180deg,#87cefa,#ffe5cc)',
+      bg_forest: 'linear-gradient(180deg,#b8e0a0,#88c070)',
+      bg_city: 'linear-gradient(180deg,#8090c0,#504060)',
+      bg_space: 'linear-gradient(180deg,#0a0a20,#2a1030)',
+    };
+    preview.innerHTML = `<div style="width:40px;height:40px;border-radius:10px;background:${colors[bg.id]};border:2px solid #fff;"></div>`;
+    const name = document.createElement('div');
+    name.className = 'shop-item-name';
+    name.textContent = bg.name;
+    const desc = document.createElement('div');
+    desc.className = 'shop-item-desc';
+    desc.textContent = 'фон';
+    const btn = document.createElement('button');
+    btn.className = 'shop-item-btn';
+    if (isEquipped) {
+      btn.textContent = 'ВЫБРАН'; btn.disabled = true;
+    } else if (isOwned) {
+      btn.textContent = 'ВЫБРАТЬ'; btn.classList.add('equip');
+      btn.onclick = () => equipBg(bg);
+    } else {
+      btn.textContent = 'КУПИТЬ ' + bg.price; btn.classList.add('buy');
+      btn.onclick = () => buyBg(bg);
+    }
+    card.appendChild(preview);
+    card.appendChild(name);
+    card.appendChild(desc);
+    card.appendChild(btn);
+    shopItems.appendChild(card);
+  });
+}
+
+function buyBg(bg) {
+  if (playerData.coins < bg.price) {
+    showToast('НЕ ХВАТАЕТ МОНЕТ!');
+    playTone(200, 0.2, 'sawtooth', 0.12);
+    return;
+  }
+  playerData.coins -= bg.price;
+  playerData.owned.push(bg.id);
+  playerData.background = bg.id;
+  savePlayerData();
+  updateCoinsUI();
+  renderShop();
+  showToast('КУПЛЕНО!');
+  sfxBuy();
+}
+function equipBg(bg) {
+  playerData.background = bg.id;
+  savePlayerData();
+  renderShop();
+  sfxClick();
+}
+
+function buyItem(item) {
+  if (playerData.coins < item.price) {
+    showToast('НЕ ХВАТАЕТ МОНЕТ!');
+    playTone(200, 0.2, 'sawtooth', 0.12);
+    return;
+  }
+  playerData.coins -= item.price;
+  playerData.owned.push(item.id);
+  playerData[selectedChar].equipped[item.type] = item.id;
+  savePlayerData();
+  updateCoinsUI();
+  renderShop();
+  showToast('КУПЛЕНО!');
+  sfxBuy();
+  giveAchievement('first_buy');
+  if (playerData.coins >= 500) giveAchievement('rich_500');
+  if (playerData.coins >= 1000) giveAchievement('rich_1000');
+}
+function equipItem(item) {
+  playerData[selectedChar].equipped[item.type] = item.id;
+  savePlayerData();
+  renderShop();
+  sfxClick();
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = `
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    background: rgba(255,255,255,0.97); color:#b8424e; font-weight:700;
+    padding: 14px 28px; border-radius: 20px; font-size: 18px;
+    letter-spacing: 3px; text-transform: uppercase;
+    box-shadow: 0 10px 30px rgba(200,60,120,0.5), 0 0 30px rgba(255,180,220,0.8), 0 0 0 3px #ffffff;
+    z-index: 100; pointer-events: none;
+    text-shadow: 0 0 10px rgba(255,180,220,0.8);
+    animation: toastFade 1.4s ease-out forwards;
+  `;
+  if (!document.getElementById('toastStyle')) {
+    const s = document.createElement('style');
+    s.id = 'toastStyle';
+    s.textContent = `@keyframes toastFade {
+      0% { opacity:0; transform:translate(-50%,-30%); }
+      15% { opacity:1; transform:translate(-50%,-50%); }
+      75% { opacity:1; transform:translate(-50%,-50%); }
+      100% { opacity:0; transform:translate(-50%,-70%); }
+    }`;
+    document.head.appendChild(s);
+  }
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 1500);
+}
+</script>
+</body>
+</html>
