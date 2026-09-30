@@ -173,7 +173,6 @@ const SHOP_ITEMS = [
   { id: 'hair_pony', name: 'ХВОСТИК', price: 60, type: 'hair', preview: 'hairPony' },
   { id: 'hair_twin', name: 'ДВА ХВОСТИКА', price: 90, type: 'hair', preview: 'hairTwin' },
   { id: 'hair_bob', name: 'КАРЕ', price: 100, type: 'hair', preview: 'hairBob' },
-  { id: 'hair_bun', name: 'ПУЧОК', price: 120, type: 'hair', preview: 'hairBun' },
   { id: 'default_acc', name: 'БЕЗ АКСЕССУАРА', price: 0, type: 'accessory', isDefault: true, preview: 'none' },
   { id: 'acc_cat', name: 'КОШАЧЬИ УШКИ', price: 150, type: 'accessory', preview: 'catEars', desc: 'будь кошкодевочкой' },
   { id: 'acc_scarf', name: 'БЕЛЫЙ ШАРФИК', price: 100, type: 'accessory', preview: 'scarf', desc: 'уютно и тепло' },
@@ -373,17 +372,28 @@ function drawCityBg() {
   g.addColorStop(1, '#504060');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
+
   for (let i = 0; i < 10; i++) {
     const bw = 40 + (i * 37) % 50;
     const bh = 100 + (i * 73) % 200;
     const bx = i * (W / 10);
     ctx.fillStyle = 'rgba(30,20,50,' + (0.4 + i * 0.03) + ')';
     ctx.fillRect(bx, H - bh, bw, bh);
-    ctx.fillStyle = 'rgba(255,220,120,0.7)';
+
+    let rowIdx = 0;
     for (let wy = H - bh + 20; wy < H - 20; wy += 30) {
+      let colIdx = 0;
       for (let wx = bx + 8; wx < bx + bw - 8; wx += 18) {
-        if (Math.random() > 0.5) ctx.fillRect(wx, wy, 6, 8);
+        const seed = (i * 73 + rowIdx * 17 + colIdx * 31) % 100;
+        if (seed < 55) {
+          const phase = (i + rowIdx + colIdx) * 0.7;
+          const flicker = 0.55 + Math.sin(skyTime * 0.0006 + phase) * 0.18;
+          ctx.fillStyle = 'rgba(255,225,190,' + flicker + ')';
+          ctx.fillRect(wx, wy, 6, 8);
+        }
+        colIdx++;
       }
+      rowIdx++;
     }
   }
   return { darkness: 0.4 };
@@ -648,17 +658,6 @@ function drawHairExtra(hairId, cfg) {
     ctx.quadraticCurveTo(22, -40, 18, -50);
     ctx.closePath(); ctx.fill();
     ctx.strokeStyle = HD; ctx.lineWidth = 1; ctx.stroke();
-  } else if (hairId === 'hair_bun') {
-    ctx.fillStyle = HM;
-    ctx.beginPath();
-    ctx.arc(0, -78, 12, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = HD; ctx.lineWidth = 1; ctx.stroke();
-    ctx.fillStyle = HL;
-    ctx.beginPath();
-    ctx.arc(-4, -80, 5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#ff5c9a';
-    ctx.beginPath(); ctx.arc(0, -68, 3, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = '#8a1040'; ctx.stroke();
   }
 }
 
@@ -692,7 +691,14 @@ function drawSonya(x, y, scale, pose, flip, eatPhase, cfg, slapped, opts) {
     jump: { left: { sx: -10, sy: -38, ex: -19, ey: -56 }, right: { sx:  10, sy: -38, ex:  19, ey: -56 } },
     eat:  { left: { sx: -10, sy: -38, ex: -13, ey: -24 }, right: { sx:  10, sy: -38, ex:  13, ey: -24 } }
   };
-  const arms = armsMap[armPose];
+  let arms = armsMap[armPose];
+  if (pose === 'wave') {
+    const wa = (opts.waveAngle || 0);
+    arms = {
+      left: armsMap.idle.left,
+      right: { sx: 10, sy: -38, ex: 17 + wa * 4, ey: -58 + wa * 3 }
+    };
+  }
 
   if (hairId === 'default_hair' || hairId === 'hair_bob') {
     ctx.fillStyle = HD;
@@ -1255,24 +1261,8 @@ function renderTap() {
   const waveProgress = state.waveT > 0 ? 1 - state.waveT / 1600 : 0;
   const waving = state.waveT > 0;
   if (waving) {
-    drawSonya(state.sonyaX, state.sonyaY + bob, state.scale, 'eat', false, eatPhase, SONYA_CFG, 0, { charKey: 'sonya' });
-    ctx.save();
-    ctx.translate(state.sonyaX, state.sonyaY + bob);
-    ctx.scale(state.scale, state.scale);
     const wa = Math.sin(waveProgress * Math.PI * 6) * 0.5;
-    ctx.strokeStyle = '#ffe4d0';
-    ctx.lineWidth = 6; ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.moveTo(10, -38);
-    ctx.lineTo(18 + wa * 4, -58);
-    ctx.stroke();
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 7.5;
-    ctx.beginPath();
-    ctx.moveTo(10, -38);
-    ctx.lineTo(15 + wa * 2, -50);
-    ctx.stroke();
-    ctx.restore();
+    drawSonya(state.sonyaX, state.sonyaY + bob, state.scale, 'wave', false, eatPhase, SONYA_CFG, 0, { charKey: 'sonya', waveAngle: wa });
   } else {
     drawSonya(state.sonyaX, state.sonyaY + bob, state.scale, 'eat', false, eatPhase, SONYA_CFG, 0, { charKey: 'sonya' });
   }
@@ -1917,8 +1907,6 @@ function renderShop() {
       preview.innerHTML = '<div style="font-size:34px;">👧</div>';
     } else if (item.preview === 'hairBob') {
       preview.innerHTML = '<div style="font-size:34px;">💁‍♀️</div>';
-    } else if (item.preview === 'hairBun') {
-      preview.innerHTML = '<div style="font-size:34px;">🍡</div>';
     } else if (item.preview === 'none') {
       preview.innerHTML = '<div style="font-size:30px;color:#bbb;">—</div>';
     }
@@ -2059,4 +2047,4 @@ function showToast(msg) {
   }
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 1500);
-}
+   }
